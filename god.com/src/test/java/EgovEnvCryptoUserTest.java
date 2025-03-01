@@ -40,8 +40,8 @@ public class EgovEnvCryptoUserTest {
 			}
 		} catch (IllegalArgumentException e) {
 			log.error("[" + e.getClass() + "] IllegalArgumentException : " + e.getMessage());
-		} catch (Exception e) {
-			log.error("[" + e.getClass() + "] Exception : " + e.getMessage());
+//		} catch (Exception e) {
+//			log.error("[" + e.getClass() + "] Exception : " + e.getMessage());
 		}
 	}
 

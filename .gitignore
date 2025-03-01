@@ -26,6 +26,9 @@ replay_pid*
 ### egov
 .classpath
 .factorypath
-.settings
-EGOV_DEV
-target
+.pmd
+
+.settings/
+EGOV_DEV/
+#reports/
+target/

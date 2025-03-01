@@ -1,4 +1,4 @@
-#Sat Mar 01 13:18:14 KST 2025
+#Sat Mar 01 13:24:44 KST 2025
 \!/=
 /configuration/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true
 /configuration/org.eclipse.epp.mpc.ui/showOpenFavoritesNotification=false
@@ -9,6 +9,10 @@
 /configuration/org.eclipse.ui.ide/SHOW_WORKSPACE_SELECTION_DIALOG=true
 /instance/Cloud\ Foundry/runTargets-v2=
 /instance/Docker/runTargets-v2=
+/instance/net.sourceforge.pmd.eclipse.plugin/net.sourceforge.pmd.eclipse.plugin.active_renderers=,text
+/instance/net.sourceforge.pmd.eclipse.plugin/net.sourceforge.pmd.eclipse.plugin.active_rules=,UselessStringValueOf,FinalFieldCouldBeStatic,StringToString,UncommentedEmptyMethodBody,AvoidSynchronizedAtMethodLevel,UnnecessarySemicolon,AvoidUsingHardCodedIP,AvoidThrowingRawExceptionTypes,AvoidThrowingNullPointerException,SwitchStmtsShouldHaveDefault,UnusedFormalParameter,UselessParentheses,AssignmentInOperand,ImmutableField,AvoidArrayLoops,MisplacedNullCheck,StringInstantiation,HardCodedCryptoKey,EmptyCatchBlock,UnnecessaryBoxing,UnnecessaryImport,SimplifyBooleanExpressions,LocalVariableNamingConventions,UnusedPrivateMethod,FormalParameterNamingConventions,InefficientEmptyStringCheck,EmptyControlStatement,UnnecessaryConversionTemporary,UnusedPrivateField,SystemPrintln,EqualsNull,AvoidCatchingGenericException,AvoidReassigningParameters,CloseResource,SimpleDateFormatNeedsLocale,BrokenNullCheck,InefficientStringBuffering,AssignmentToNonFinalStatic,FieldNamingConventions,ArrayIsStoredDirectly,AvoidPrintStackTrace,ConstantsInInterface,AbstractClassWithoutAbstractMethod,MethodReturnsInternalArray
+/instance/net.sourceforge.pmd.eclipse.plugin/net.sourceforge.pmd.eclipse.plugin.globalRuleManagement=true
+/instance/net.sourceforge.pmd.eclipse.plugin/net.sourceforge.pmd.eclipse.plugin.ruletable.hiddenColumns=,tExtURL,tXmpCnt,tMaxLang,tSince,fixCnt,tMinLang,modCnt
 /instance/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true
 /instance/org.eclipse.core.resources/encoding=UTF-8
 /instance/org.eclipse.core.resources/version=1
@@ -18,7 +22,7 @@
 /instance/org.eclipse.egit.core/GitRepositoriesView.GitDirectories.relative=egov-4.3\\.git;
 /instance/org.eclipse.egit.core/RepositorySearchDialogSearchPath=C\:\\EGOV_DEV\\eGovFrameDev-4.2.0-64bit\\workspace\\egov-4.3
 /instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources=false
-/instance/org.eclipse.egit.ui/commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>\uD45C\uC900 Inspection \uB8F0\uC14B \uD55C\uAE00/\uC601\uBB38\uD310\uC758 \uC555\uCD95\uD30C\uC77C \: \uAC1C\uBC1C\uD658\uACBD 4.2 \uC774\uC0C1 \uBC84\uC804 \uC0AC\uC6A9</message>\r\n<message>context-crypto.xml \uD30C\uC77C\uC5D0\uC11C algorithmKey\uBC0F algorithmKeyHash \uAE30\uBCF8\uAC12\uC744 \uBC18\uB4DC\uC2DC \uB2E4\uB978 \uAC83\uC73C\uB85C&\#x0A;\uBCC0\uACBD\uD558\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4.</message>\r\n<message>\uACF5\uD1B5</message>\r\n<message>\uAD00\uB9AC\uC790 \uD398\uC774\uC9C0</message>\r\n</messages>
+/instance/org.eclipse.egit.ui/commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>\uC774\uD074\uB9BD\uC2A4 \uC124\uC815</message>\r\n<message>\uD45C\uC900 Inspection \uB8F0\uC14B \uD55C\uAE00/\uC601\uBB38\uD310\uC758 \uC555\uCD95\uD30C\uC77C \: \uAC1C\uBC1C\uD658\uACBD 4.2 \uC774\uC0C1 \uBC84\uC804 \uC0AC\uC6A9</message>\r\n<message>context-crypto.xml \uD30C\uC77C\uC5D0\uC11C algorithmKey\uBC0F algorithmKeyHash \uAE30\uBCF8\uAC12\uC744 \uBC18\uB4DC\uC2DC \uB2E4\uB978 \uAC83\uC73C\uB85C&\#x0A;\uBCC0\uACBD\uD558\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4.</message>\r\n<message>\uACF5\uD1B5</message>\r\n<message>\uAD00\uB9AC\uC790 \uD398\uC774\uC9C0</message>\r\n</messages>
 /instance/org.eclipse.egit.ui/repositories_view_filters=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<FilterCache/>
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.classpathVariable.M2_REPO=C\:/EGOV_DEV/.m2/repository
@@ -250,6 +254,7 @@
 /instance/org.springframework.ide.eclipse.imports/org.springframework.ide.eclipse.imports.importStaticsInstanceScope=true
 /instance/org.springsource.ide.eclipse.commons.frameworks.core/org.springsource.ide.eclipse.commons.frameworks.ui.legacyconversion.done=true
 /instance/org.springsource.ide.eclipse.commons.ui/egit.pref.fixed.core_autoIgnoreDerivedResources=true
+@net.sourceforge.pmd.eclipse.plugin=7.0.0.v20230530-1924-rc3
 @org.eclipse.core.net=1.4.0.v20220813-1037
 @org.eclipse.core.resources=3.18.100.v20221025-2047
 @org.eclipse.debug.ui=3.17.100.v20220926-1344
