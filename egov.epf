@@ -1,4 +1,4 @@
-#Sat Mar 01 13:24:44 KST 2025
+#Sun Mar 02 09:54:31 KST 2025
 \!/=
 /configuration/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true
 /configuration/org.eclipse.epp.mpc.ui/showOpenFavoritesNotification=false
@@ -18,11 +18,14 @@
 /instance/org.eclipse.core.resources/version=1
 /instance/org.eclipse.debug.ui/org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<launchPerspectives/>\r\n
 /instance/org.eclipse.debug.ui/preferredTargets=default,org.eclipse.lsp4e.debug.toggleBreakpointTarget\:default|org.eclipse.lsp4e.debug.toggleBreakpointTarget\:org.eclipse.lsp4e.debug.toggleBreakpointTarget|
-/instance/org.eclipse.egit.core/GitRepositoriesView.GitDirectories=C\:\\EGOV_DEV\\eGovFrameDev-4.2.0-64bit\\workspace\\egov-4.3\\.git;
-/instance/org.eclipse.egit.core/GitRepositoriesView.GitDirectories.relative=egov-4.3\\.git;
+/instance/org.eclipse.egit.core/GitRepositoriesView.GitDirectories=C\:\\EGOV_DEV\\eGovFrameDev-4.2.0-64bit\\workspace\\git\\egov-4.3\\.git;C\:\\EGOV_DEV\\eGovFrameDev-4.2.0-64bit\\workspace\\git\\egovframe-common-components\\.git;
+/instance/org.eclipse.egit.core/GitRepositoriesView.GitDirectories.relative=git\\egov-4.3\\.git;git\\egovframe-common-components\\.git;
+/instance/org.eclipse.egit.core/RepositoryGroups.uuids=
 /instance/org.eclipse.egit.core/RepositorySearchDialogSearchPath=C\:\\EGOV_DEV\\eGovFrameDev-4.2.0-64bit\\workspace\\egov-4.3
 /instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources=false
-/instance/org.eclipse.egit.ui/commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>\uC774\uD074\uB9BD\uC2A4 \uC124\uC815</message>\r\n<message>\uD45C\uC900 Inspection \uB8F0\uC14B \uD55C\uAE00/\uC601\uBB38\uD310\uC758 \uC555\uCD95\uD30C\uC77C \: \uAC1C\uBC1C\uD658\uACBD 4.2 \uC774\uC0C1 \uBC84\uC804 \uC0AC\uC6A9</message>\r\n<message>context-crypto.xml \uD30C\uC77C\uC5D0\uC11C algorithmKey\uBC0F algorithmKeyHash \uAE30\uBCF8\uAC12\uC744 \uBC18\uB4DC\uC2DC \uB2E4\uB978 \uAC83\uC73C\uB85C&\#x0A;\uBCC0\uACBD\uD558\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4.</message>\r\n<message>\uACF5\uD1B5</message>\r\n<message>\uAD00\uB9AC\uC790 \uD398\uC774\uC9C0</message>\r\n</messages>
+/instance/org.eclipse.egit.core/core_defaultRepositoryDir=C\:\\EGOV_DEV\\eGovFrameDev-4.2.0-64bit\\workspace\\git
+/instance/org.eclipse.egit.core/core_ssh_default_agent=\\\\.\\pageant
+/instance/org.eclipse.egit.ui/commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>At least one of the problems in category &apos;unused&apos; is not analysed due to&\#x0A;a compiler option being&\#x0A;ignored&\#x09;EgovSiteMapngServiceImpl.java&\#x09;/god.comall/src/main/java/egovframework/com/sym/mnu/stm/service/impl&\#x09;line&\#x0A;43&\#x09;Java Problem</message>\r\n<message>Unnecessary&\#x0A;@SuppressWarnings(&quot;unchecked&quot;)&\#x09;BatchScheduler.java&\#x09;/god.comall/src/main/java/egovframework/com/sym/bat/service&\#x09;line&\#x0A;157&\#x09;Java Problem</message>\r\n<message>The static field EgovFileMngController.cryptoService should be accessed&\#x0A;in a static&\#x0A;way&\#x09;EgovFileMngController.java&\#x09;/god.com/src/main/java/egovframework/com/cmm/web&\#x09;line&\#x0A;56&\#x09;Java Problem&\#x0A;The static field EgovFileMngController.cryptoService should be accessed&\#x0A;in a static&\#x0A;way&\#x09;EgovFileMngController.java&\#x09;/god.comall/src/main/java/egovframework/com/cmm/web&\#x09;line&\#x0A;56&\#x09;Java Problem</message>\r\n<message>The method getEmails(OAuthUniversalUser, JsonNode) from the type&\#x0A;OAuthLogin is never used&\#x0A;locally&\#x09;OAuthLogin.java&\#x09;/god.comall/src/main/java/egovframework/com/ext/oauth/service&\#x09;line&\#x0A;86&\#x09;Java Problem</message>\r\n<message>The import twitter4j.Status is never&\#x0A;used&\#x09;EgovTwitterTrnsmitService.java&\#x09;/god.comall/src/main/java/egovframework/com/uss/ion/tir/service&\#x09;line&\#x0A;6&\#x09;Java Problem&\#x0A;The import twitter4j.Status is never&\#x0A;used&\#x09;EgovTwitterTrnsmitServiceImpl.java&\#x09;/god.comall/src/main/java/egovframework/com/uss/ion/tir/service/impl&\#x09;line&\#x0A;16&\#x09;Java Problem</message>\r\n<message>Description&\#x09;Resource&\#x09;Path&\#x09;Location&\#x09;Type&\#x0A;The import com.raonsecure.omnione.core.eoscommander.util.StringUtils is&\#x0A;never used&\#x09;EgovComUtlController.java&\#x09;/god.com/src/main/java/egovframework/com/cmm/web&\#x09;line&\#x0A;13&\#x09;Java Problem&\#x0A;The value of the field EgovComUtlController.LOGGER is not&\#x0A;used&\#x09;EgovComUtlController.java&\#x09;/god.com/src/main/java/egovframework/com/cmm/web&\#x09;line&\#x0A;43&\#x09;Java Problem&\#x0A;</message>\r\n<message>Resource leak\: &apos;context&apos; is never&\#x0A;closed&\#x09;EgovEnvCryptoUserTest.java&\#x09;/god.com/src/test/java&\#x09;line 21&\#x09;Java&\#x0A;Problem</message>\r\n<message>pmd test</message>\r\n<message>\uC774\uD074\uB9BD\uC2A4 \uC124\uC815</message>\r\n<message>\uD45C\uC900 Inspection \uB8F0\uC14B \uD55C\uAE00/\uC601\uBB38\uD310\uC758 \uC555\uCD95\uD30C\uC77C \: \uAC1C\uBC1C\uD658\uACBD 4.2 \uC774\uC0C1 \uBC84\uC804 \uC0AC\uC6A9</message>\r\n</messages>
 /instance/org.eclipse.egit.ui/repositories_view_filters=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<FilterCache/>
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.classpathVariable.M2_REPO=C\:/EGOV_DEV/.m2/repository
@@ -201,7 +204,7 @@
 /instance/org.eclipse.oomph.workingsets/working.set.group=<?xml version\="1.0" encoding\="UTF-8"?>\n<workingsets\:WorkingSetGroup xmi\:version\="2.0" xmlns\:xmi\="http\://www.omg.org/XMI" xmlns\:workingsets\="http\://www.eclipse.org/oomph/workingsets/1.0"/>\n
 /instance/org.eclipse.pde.api.tools/knownEEFragments=
 /instance/org.eclipse.team.ui/org.eclipse.team.ui.sychronizing_default_participant=org.eclipse.egit.ui.modelCompareParticipant
-/instance/org.eclipse.team.ui/org.eclipse.team.ui.sychronizing_default_participant_sec_id=1740800159869
+/instance/org.eclipse.team.ui/org.eclipse.team.ui.sychronizing_default_participant_sec_id=1740874296615
 /instance/org.eclipse.ui.browser/browsers=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<web-browsers current\="0">\r\n<system/>\r\n<external location\="C\:\\Program Files\\Internet Explorer\\iexplore.exe" name\="Internet Explorer"/>\r\n<external location\="C\:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" name\="Microsoft Edge"/>\r\n<external location\="C\:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" name\="Chrome"/>\r\n</web-browsers>
 /instance/org.eclipse.ui.editors/showWhitespaceCharacters=true
 /instance/org.eclipse.ui.ide/platformState=1684133589349
@@ -248,8 +251,6 @@
 /instance/org.eclipse.wst.ws.service.policy/org.eclipse.wst.ws.service.policy.ui.servicepols.wsiprofilecomp.wsissbp.defaultProtocol=http\://schemas.xmlsoap.org/wsdl/soap/
 /instance/org.eclipse.wst.xml.ui/org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart.lastActivePage=1
 /instance/org.springframework.ide.eclipse.boot.dash/toggle-filters\:enableRegexFilter=false
-/instance/org.springframework.ide.eclipse.boot.dash\:Cloud\ Foundry/runTargets-v2=
-/instance/org.springframework.ide.eclipse.boot.dash\:Docker/runTargets-v2=
 /instance/org.springframework.ide.eclipse.boot.launch/cglib.breakpoint.warning.disabled=true
 /instance/org.springframework.ide.eclipse.imports/org.springframework.ide.eclipse.imports.importStaticsInstanceScope=true
 /instance/org.springsource.ide.eclipse.commons.frameworks.core/org.springsource.ide.eclipse.commons.frameworks.ui.legacyconversion.done=true
