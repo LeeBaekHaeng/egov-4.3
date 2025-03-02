@@ -1,7 +1,7 @@
 import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
 import org.egovframe.rte.fdl.cryptography.impl.EgovEnvCryptoServiceImpl;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import lombok.extern.slf4j.Slf4j;
@@ -11,16 +11,19 @@ public class EgovEnvCryptoUserTest {
 
 	@Test
 	public void test() {
-		String[] arrCryptoString = { "userId", // 데이터베이스 접속 계정 설정
-				"userPassword", // 데이터베이스 접속 패드워드 설정
-				"url", // 데이터베이스 접속 주소 설정
-				"databaseDriver" // 데이터베이스 드라이버
+		String[] arrCryptoString = { "com", // 데이터베이스 접속 계정 설정
+				"com01", // 데이터베이스 접속 패드워드 설정
+				"jdbc:log4jdbc:mysql://127.0.0.1:3306/com", // 데이터베이스 접속 주소 설정
+				"net.sf.log4jdbc.DriverSpy" // 데이터베이스 드라이버
 		};
 
 		log.info("------------------------------------------------------");
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				new String[] { "classpath:/context-crypto-test.xml" });
-		EgovEnvCryptoService cryptoService = context.getBean(EgovEnvCryptoServiceImpl.class);
+		EgovEnvCryptoService cryptoService;
+		try (AbstractApplicationContext context = new ClassPathXmlApplicationContext(
+				new String[] { "classpath:/context-crypto-test.xml" });) {
+			cryptoService = context.getBean(EgovEnvCryptoServiceImpl.class);
+		}
+
 		log.info("------------------------------------------------------");
 
 		String label = "";
@@ -40,9 +43,10 @@ public class EgovEnvCryptoUserTest {
 			}
 		} catch (IllegalArgumentException e) {
 			log.error("[" + e.getClass() + "] IllegalArgumentException : " + e.getMessage());
-//		} catch (Exception e) {
-//			log.error("[" + e.getClass() + "] Exception : " + e.getMessage());
 		}
+
+//		((ClassPathXmlApplicationContext) context).close();
+//		((AbstractApplicationContext) context).close();
 	}
 
 }
