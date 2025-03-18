@@ -275,3 +275,113 @@ C:\Users\bhlee\git
 ```
 C:\EGOVFRAMEDEV-4.3.0-64BIT\eGovFrameDev-4.3.0-64bit\workspace-egov\git
 ```
+
+## context-crypto.xml 파일에서 algorithmKey및 algorithmKeyHash 기본값 변경
+
+context-crypto.xml 파일에서 algorithmKey및 algorithmKeyHash 기본값을 반드시 다른 것으로 변경하시기 바랍니다.
+
+[실행환경 Crypto 설정간소화 관련 위키가이드 참조](https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte4.0:fdl:crypto)
+
+- EgovEnvCryptoAlgorithmCreateTest
+- EgovEnvCryptoUserTest
+
+Crypto algorithmKey, algorithmKeyHash 생성
+
+```
+EgovEnvCryptoAlgorithmCreateTest
+```
+
+```java
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+ 
+import org.egovframe.rte.fdl.cryptography.EgovPasswordEncoder;
+ 
+public class EgovEnvCryptoAlgorithmCreateTest {
+ 
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovEnvCryptoAlgorithmCreateTest.class);
+ 
+	//계정암호화키 키
+	public String algorithmKey = "(사용자정의 값)";
+ 
+	//계정암호화 알고리즘(MD5, SHA-1, SHA-256)
+	public String algorithm = "SHA-256";
+ 
+	//계정암호화키 블럭사이즈
+	public int algorithmBlockSize = 1024;
+ 
+	public static void main(String[] args) {
+		EgovEnvCryptoAlgorithmCreateTest cryptoTest = new EgovEnvCryptoAlgorithmCreateTest();
+ 
+		EgovPasswordEncoder egovPasswordEncoder = new EgovPasswordEncoder();
+		egovPasswordEncoder.setAlgorithm(cryptoTest.algorithm);
+ 
+		LOGGER.info("------------------------------------------------------");
+		LOGGER.info("알고리즘(algorithm) : "+cryptoTest.algorithm);
+		LOGGER.info("알고리즘 키(algorithmKey) : "+cryptoTest.algorithmKey);
+		LOGGER.info("알고리즘 키 Hash(algorithmKeyHash) : "+egovPasswordEncoder.encryptPassword(cryptoTest.algorithmKey));
+		LOGGER.info("알고리즘 블럭사이즈(algorithmBlockSize)  :"+cryptoTest.algorithmBlockSize);
+ 
+	}
+}
+```
+
+환경설정 파일(globals.properties)의 데이터베이스 연결 항목(Url, UserName, Password) 인코딩 값 생성
+
+```
+EgovEnvCryptoUserTest
+```
+
+```java
+// 데이터베이스 연결 항목(Url, UserName, Password) 인코딩 값 생성 JAVA
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+ 
+import org.egovframe.rte.fdl.cryptography.EgovEnvCryptoService;
+import org.egovframe.rte.fdl.cryptography.impl.EgovEnvCryptoServiceImpl;
+ 
+public class EgovEnvCryptoUserTest {
+ 
+	private static final Logger LOGGER = LoggerFactory.getLogger(EgovEnvCryptoUserTest.class);
+ 
+	public static void main(String[] args) {
+ 
+		String[] arrCryptoString = { 
+		"userId",         //데이터베이스 접속 계정 설정
+		"userPassword",   //데이터베이스 접속 패드워드 설정
+		"url",            //데이터베이스 접속 주소 설정
+		"databaseDriver"  //데이터베이스 드라이버
+              };
+ 
+ 
+		LOGGER.info("------------------------------------------------------");		
+		ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:/context-crypto-test.xml"});
+		EgovEnvCryptoService cryptoService = context.getBean(EgovEnvCryptoServiceImpl.class);
+		LOGGER.info("------------------------------------------------------");
+ 
+		String label = "";
+		try {
+			for(int i=0; i < arrCryptoString.length; i++) {		
+				if(i==0)label = "사용자 아이디";
+				if(i==1)label = "사용자 비밀번호";
+				if(i==2)label = "접속 주소";
+				if(i==3)label = "데이터 베이스 드라이버";
+				LOGGER.info(label+" 원본(orignal):" + arrCryptoString[i]);
+				LOGGER.info(label+" 인코딩(encrypted):" + cryptoService.encrypt(arrCryptoString[i]));
+				LOGGER.info("------------------------------------------------------");
+			}
+		} catch (IllegalArgumentException e) {
+			LOGGER.error("["+e.getClass()+"] IllegalArgumentException : " + e.getMessage());
+		} catch (Exception e) {
+			LOGGER.error("["+e.getClass()+"] Exception : " + e.getMessage());
+		}
+ 
+	}
+ 
+}
+```
+
+## 단위 테스트
+
