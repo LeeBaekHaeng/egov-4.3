@@ -7,7 +7,8 @@ public class EgovEnvCryptoAlgorithmCreateTest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(EgovEnvCryptoAlgorithmCreateTest.class);
 
 	// 계정암호화키 키
-	public String algorithmKey = "(사용자정의 값)";
+//	public String algorithmKey = "(사용자정의 값)";
+	public String algorithmKey = "egovframe";
 
 	// 계정암호화 알고리즘(MD5, SHA-1, SHA-256)
 	public String algorithm = "SHA-256";
