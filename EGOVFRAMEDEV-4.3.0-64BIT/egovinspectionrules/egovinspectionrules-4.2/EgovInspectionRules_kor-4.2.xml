@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="pmd-eclipse" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+	<description>PMD Plugin preferences rule set</description>
+	<!--
+    	Deprecated class : net.sourceforge.pmd.lang.rule.XPathRule
+						-> net.sourceforge.pmd.lang.java.rule.design.AvoidThrowingNullPointerExceptionRule
+    -->
+	<rule name="AvoidThrowingNullPointerException" language="java" since="1.8" message="NullPointerException을 throw하는 것은 비추천" class="net.sourceforge.pmd.lang.java.rule.design.AvoidThrowingNullPointerExceptionRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_design.html#avoidthrowingnullpointerexception">
+		<description>
+		<![CDATA[
+		Avoid throwing NullPointerExceptions manually. These are confusing because most people will assume that the
+		virtual machine threw it.  To avoid a method being called with a null parameter, you may consider
+		using an IllegalArgumentException instead, making it clearly seen as a programmer-initiated exception.
+		However, there are better ways to handle this:
+		>*Effective Java, 3rd Edition, Item 72: Favor the use of standard exceptions*
+		>
+		>Arguably, every erroneous method invocation boils down to an illegal argument or state,
+		but other exceptions are standardly used for certain kinds of illegal arguments and states.
+		If a caller passes null in some parameter for which null values are prohibited, convention dictates that
+		NullPointerException be thrown rather than IllegalArgumentException.
+		To implement that, you are encouraged to use `java.util.Objects.requireNonNull()`
+		(introduced in Java 1.7). This method is designed primarily for doing parameter
+		validation in methods and constructors with multiple parameters.
+		Your parameter validation could thus look like the following:
+		```
+		public class Foo {
+			private String exampleValue;
+			void setExampleValue(String exampleValue) {
+			  // check, throw and assignment in a single standard call
+			  this.exampleValue = Objects.requireNonNull(exampleValue, "exampleValue must not be null!");
+			}
+		  }
+		```
+		]]></description>
+		<priority>1</priority>
+		<example>
+			<![CDATA[
+			public class Foo {
+				void bar() {
+					throw new NullPointerException();
+				}
+			}
+			]]></example>
+	</rule>
+	<rule name="AvoidThrowingRawExceptionTypes" language="java" since="1.8" message="가공되지 않은 Exception을 throw하는 것은 비추천" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_design.html#avoidthrowingrawexceptiontypes">
+		<description>
+			Avoid throwing certain exception types. Rather than throw a raw RuntimeException, Throwable,
+			Exception, or Error, use a subclassed exception or error instead.
+        </description>
+		<priority>1</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+				//ThrowStatement//ConstructorCall
+				 /ClassOrInterfaceType[
+				 pmd-java:typeIsExactly('java.lang.Throwable')
+				or
+				 pmd-java:typeIsExactly('java.lang.Exception')
+				or
+				 pmd-java:typeIsExactly('java.lang.Error')
+				or
+				 pmd-java:typeIsExactly('java.lang.RuntimeException')
+				]
+				]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			public class Foo {
+				public void bar() throws Exception {
+					throw new Exception();
+				}
+			}
+			]]></example>
+	</rule>
+	<rule name="EqualsNull" language="java" since="1.9" message="null 값과 비교하기 위해 equals 함수를 사용하였음" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#equalsnull">
+		<description>
+			Tests for null should not use the equals() method. The '==' operator should be used instead.
+        </description>
+		<priority>1</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+				//MethodCall[@MethodName = "equals" and ArgumentList[count(*) = 1 and NullLiteral]]
+				]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			String x = "foo";
+			if (x.equals(null)) {   // bad form
+				doSomething();
+			}
+			if (x == null) {        // preferred
+				doSomething();
+			}
+			]]></example>
+	</rule>
+	<!-- 
+        name : VariableNamingConventions (remove) -> FieldNamingConventions, FormalParameterNamingConventions, and LocalVariableNamingConventions.
+        This rule is deprecated and will be removed with PMD 7.0.0. The rule is replaced by the more general rules FieldNamingConventions, FormalParameterNamingConventions, and LocalVariableNamingConventions.
+    -->
+	<rule name="FieldNamingConventions" language="java" since="6.7.0" message="''{0}'' 의 변수 ''{1}'' 이  ''{2}''  로 시작함" class="net.sourceforge.pmd.lang.java.rule.codestyle.FieldNamingConventionsRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_codestyle.html#fieldnamingconventions">
+		<description>
+            Configurable naming conventions for field declarations. This rule reports variable declarations
+            which do not match the regex that applies to their specific kind ---e.g. constants (static final),
+            enum constant, final field. Each regex can be configured through properties.
+
+            By default this rule uses the standard Java naming convention (Camel case), and uses the ALL_UPPER
+            convention for constants and enum constants.
+        </description>
+		<priority>1</priority>
+		<example>
+            <![CDATA[
+            class Foo {
+                int myField = 1; // This is in camel case, so it's ok
+                int my_Field = 1; // This contains an underscore, it's not ok by default
+                                  // but you may allow it, or even require the "my_" prefix
+                final int FinalField = 1; // you may configure a different convention for final fields,
+                                          // e.g. here PascalCase: [A-Z][a-zA-Z0-9]*
+                interface Interface {
+                    double PI = 3.14; // interface "fields" use the constantPattern property
+                }
+                enum AnEnum {
+                    ORG, NET, COM; // These use a separate property but are set to ALL_UPPER by default
+                }
+            }
+            ]]></example>
+	</rule>
+	<rule name="FormalParameterNamingConventions" language="java" since="6.6.0" message="''{0}'' 의 변수 ''{1}'' 이  ''{2}''  로 시작함" class="net.sourceforge.pmd.lang.java.rule.codestyle.FormalParameterNamingConventionsRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_codestyle.html#formalparameternamingconventions">
+		<description>
+            Configurable naming conventions for formal parameters of methods and lambdas.
+            This rule reports formal parameters which do not match the regex that applies to their
+            specific kind (e.g. lambda parameter, or final formal parameter). Each regex can be
+            configured through properties.
+
+            By default this rule uses the standard Java naming convention (Camel case).
+        </description>
+		<priority>1</priority>
+		<example>
+            <![CDATA[
+            class Foo {
+                abstract void bar(int myInt); // This is Camel case, so it's ok
+                void bar(int my_i) { // this will be reported
+                }
+                void lambdas() {
+                    // lambdas parameters can be configured separately
+                    Consumer<String> lambda1 = s_str -> { };
+                    // lambda parameters with an explicit type can be configured separately
+                    Consumer<String> lambda1 = (String str) -> { };
+                }
+            }
+            ]]></example>
+	</rule>
+	
+	<!-- 
+        name : MisLeadingVariableName (remove) -> LocalVariableNamingConventions 
+        This rule is deprecated and will be removed with PMD 7.0.0. The rule is replaced by the more general rule LocalVariableNamingConventions.
+    -->
+	<rule name="LocalVariableNamingConventions" language="java" since="6.6.0" message="''{0}'' 의 변수 ''{1}'' 이  ''{2}''  로 시작함" class="net.sourceforge.pmd.lang.java.rule.codestyle.LocalVariableNamingConventionsRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_codestyle.html#localvariablenamingconventions">
+		<description>
+            Configurable naming conventions for local variable declarations and other locally-scoped
+            variables. This rule reports variable declarations which do not match the regex that applies to their
+            specific kind (e.g. final variable, or catch-clause parameter). Each regex can be configured through
+            properties.
+
+            By default this rule uses the standard Java naming convention (Camel case).
+        </description>
+		<priority>1</priority>
+		<example>
+            <![CDATA[
+            class Foo {
+                void bar() {
+                    int localVariable = 1; // This is in camel case, so it's ok
+                    int local_variable = 1; // This will be reported unless you change the regex
+                    final int i_var = 1; // final local variables can be configured separately
+                    try {
+                        foo();
+                    } catch (IllegalArgumentException e_illegal) {
+                        // exception block parameters can be configured separately
+                    }
+                }
+            }
+            ]]></example>
+	</rule>
+	<rule name="AvoidReassigningParameters" language="java" since="1.0" message="''{0}'' 처럼 파라미터 값을 직접 변경하지 말 것" class="net.sourceforge.pmd.lang.java.rule.bestpractices.AvoidReassigningParametersRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#avoidreassigningparameters">
+		<description>
+			Reassigning values to incoming parameters of a method or constructor is not recommended, as this can
+			make the code more difficult to understand. The code is often read with the assumption that parameter values
+			don't change and an assignment violates therefore the principle of least astonishment. This is especially a
+			problem if the parameter is documented e.g. in the method's javadoc and the new content differs from the original
+			documented content.
+
+			Use temporary local variables instead. This allows you to assign a new name, which makes the code better
+			understandable.
+
+			Note that this rule considers both methods and constructors. If there are multiple assignments for a formal
+			parameter, then only the first assignment is reported.
+        </description>
+		<priority>2</priority>
+		<example>
+			<![CDATA[
+			public class Hello {
+			  private void greet(String name) {
+				name = name.trim();
+				System.out.println("Hello " + name);
+				// preferred
+				String trimmedName = name.trim();
+				System.out.println("Hello " + trimmedName);
+			  }
+			}
+			]]></example>
+	</rule>
+	<rule name="StringInstantiation" language="java" since="1.0" message="필요없는 Instance가 생성되어 있음" class="net.sourceforge.pmd.lang.java.rule.performance.StringInstantiationRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_performance.html#stringinstantiation">
+		<description>
+			Avoid instantiating String objects; this is usually unnecessary since they are immutable and can be safely shared.
+        </description>
+		<priority>2</priority>
+		<example>
+			<![CDATA[
+			private String bar = new String("bar"); // just do a String bar = "bar";
+			]]></example>
+	</rule>
+	<rule name="AbstractClassWithoutAbstractMethod" language="java" since="3.0" message="Abstract Class내에  Abstract Method가 존재하지 않음" class="net.sourceforge.pmd.lang.java.rule.bestpractices.AbstractClassWithoutAbstractMethodRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#abstractclasswithoutabstractmethod">
+		<description>
+			The abstract class does not contain any abstract methods. An abstract class suggests
+			an incomplete implementation, which is to be completed by subclasses implementing the
+			abstract methods. If the class is intended to be used as a base class only (not to be instantiated
+			directly) a protected constructor can be provided to prevent direct instantiation.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public abstract class Foo {
+			  void int method1() { ... }
+			  void int method2() { ... }
+			  // consider using abstract methods or removing
+			  // the abstract modifier and adding protected constructors
+			}
+			]]></example>
+	</rule>
+	<rule name="AssignmentInOperand" language="java" since="1.03" message="피연산자내에 할당문이 사용됨. Code 를 복잡하고 가독성이 떨어지게 만듬" class="net.sourceforge.pmd.lang.java.rule.errorprone.AssignmentInOperandRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#assignmentinoperand">
+		<description>
+			Avoid assignments in operands; this can make code more complicated and harder to read.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public void bar() {
+				int x = 2;
+				if ((x = getX()) == 3) {
+				  System.out.println("3!");
+				}
+			}
+			]]></example>
+	</rule>
+	<rule name="AssignmentToNonFinalStatic" language="java" since="2.2" message="static 필드의 안전하지 않은 사용 가능성" class="net.sourceforge.pmd.lang.java.rule.errorprone.AssignmentToNonFinalStaticRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#assignmenttononfinalstatic">
+		<description>
+			Identifies a possible unsafe usage of a static field.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public class StaticField {
+			   static int x;
+			   public FinalFields(int y) {
+				x = y; // unsafe
+			   }
+			}
+			]]></example>
+	</rule>
+	<rule name="AvoidArrayLoops" language="java" since="3.5" message="배열의 값을 루프문을 이용하여 복사하는 것 보다 System.arraycopy() 메소드를 이용하여 복사하는 것이 효율적이며 수행 속도가 빠름" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_performance.html#avoidarrayloops">
+		<description>
+			Instead of manually copying data between two arrays, use the more efficient `Arrays.copyOf`
+			or `System.arraycopy` method instead.
+
+			To copy only part of the array, use `Arrays.copyOfRange` or `System.arraycopy`.
+
+			If you want to copy/move elements inside the _same_ array (e.g. shift the elements), use `System.arraycopy`.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					//(ForStatement[ForUpdate//(UnaryExpression[@Operator=('++','--')] | AssignmentExpression[@Operator = ('+=', '-=')][NumericLiteral[@Image = '1']])]
+					 | WhileStatement | DoStatement)
+						[not(.//ContinueStatement)]
+						[not(.//BreakStatement)]
+						[not(.//ThrowStatement)]
+						[not(.//ReturnStatement)]
+						[count(Block//AssignmentExpression[@Operator='=']
+														  (: no nested arrays or method calls as array index :)
+														  [count(ArrayAccess[not(.//ArrayAccess)]
+																			[not(.//MethodCall)])=2]
+														  (: array access indexes must be same (excluding constants) :)
+														  [deep-equal(
+															sort(distinct-values(ArrayAccess[1]/(VariableAccess[2]|InfixExpression//VariableAccess)
+																(: don't consider array length accesses :)
+																[not(parent::FieldAccess[@Name='length'])]
+																[
+																   (: exclude referenced constants :)
+																   not(@Name = (ancestor::MethodDeclaration|//FieldDeclaration)//VariableDeclarator[NumericLiteral][not(../../../parent::ForInit)]/VariableDeclaratorId/@Name)
+																   or
+																   (: include loop variable :)
+																   @Name = ancestor::ForStatement/ForInit/LocalVariableDeclaration/VariableDeclarator/VariableDeclaratorId/@Name
+																]
+																/@Name)),
+															sort(distinct-values(ArrayAccess[2]/(VariableAccess[2]|InfixExpression//VariableAccess)
+																(: don't consider array length accesses :)
+																[not(parent::FieldAccess[@Name='length'])]
+																[
+																   (: exclude referenced constants :)
+																   not(@Name = (ancestor::MethodDeclaration|//FieldDeclaration)//VariableDeclarator[NumericLiteral][not(../../../parent::ForInit)]/VariableDeclaratorId/@Name)
+																   or
+																   (: include loop variable :)
+																   @Name = ancestor::ForStatement/ForInit/LocalVariableDeclaration/VariableDeclarator/VariableDeclaratorId/@Name
+																]
+																/@Name))
+														  )]
+						 )=1]
+					]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			class Scratch {
+				void copy_a_to_b() {
+					int[] a = new int[10];
+					int[] b = new int[10];
+					for (int i = 0; i < a.length; i++) {
+						b[i] = a[i];
+					}
+					// equivalent
+					b = Arrays.copyOf(a, a.length);
+					// equivalent
+					System.arraycopy(a, 0, b, 0, a.length);
+					int[] c = new int[10];
+					// this will not trigger the rule
+					for (int i = 0; i < c.length; i++) {
+						b[i] = a[c[i]];
+					}
+				}
+			}
+			]]></example>
+		<example>
+			<![CDATA[
+			class Scratch {
+				void shift_left(int[] a) {
+					for (int i = 0; i < a.length - 1; i++) {
+						a[i] = a[i + 1];
+					}
+					// equivalent
+					System.arraycopy(a, 1, a, 0, a.length - 1);
+				}
+				void shift_right(int[] a) {
+					for (int i = a.length - 1; i > 0; i--) {
+						a[i] = a[i - 1];
+					}
+					// equivalent
+					System.arraycopy(a, 0, a, 1, a.length - 1);
+				}
+			}
+			]]></example>
+	</rule>
+	<!-- 
+        name : AvoidConstantsInterface (remove) -> ConstantsInInterface 
+        With PMD 5.5.0, a new rule ConstantsInInterface has been added. 
+        However, there is already a very similar rule AvoidConstantsInterface. 
+        To remove the old (deprecated) rule name, so that there is only one rule.
+    -->
+	<rule name="ConstantsInInterface" language="java" since="5.5" message="Interface는 클래스의 behavior 을 구현하는 데에만 사용해야 함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#constantsininterface">
+		<description>
+			Using constants in interfaces is a bad practice. Interfaces define types, constants are implementation details better placed in classes or enums. If the constants are best viewed as members of an enumerated type, you should export them with an enum type.
+			For other scenarios, consider using a utility class. See Effective Java's 'Use interfaces only to define types'.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="ignoreIfHasMethods" type="Boolean" description="Whether to ignore constants in interfaces if the interface defines any methods" value="true"/>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					//ClassOrInterfaceDeclaration[@Interface = true()][$ignoreIfHasMethods= false() or not(ClassOrInterfaceBody/MethodDeclaration)]/ClassOrInterfaceBody/FieldDeclaration
+					 ]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			public interface ConstantInterface {
+				public static final int CONST1 = 1; // violation, no fields allowed in interface!
+				static final int CONST2 = 1;        // violation, no fields allowed in interface!
+				final int CONST3 = 1;               // violation, no fields allowed in interface!
+				int CONST4 = 1;                     // violation, no fields allowed in interface!
+			}
+			// with ignoreIfHasMethods = false
+			public interface AnotherConstantInterface {
+				public static final int CONST1 = 1; // violation, no fields allowed in interface!
+				int anyMethod();
+			}
+			// with ignoreIfHasMethods = true
+			public interface YetAnotherConstantInterface {
+				public static final int CONST1 = 1; // no violation
+				int anyMethod();
+			}
+			 ]]></example>
+	</rule>
+	<rule name="AvoidSynchronizedAtMethodLevel" language="java" since="3.0" message="mothod 레벨의 synchronization 보다 block 레벨 synchronization 을 사용하는 것이 바람직함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel">
+		<description>
+			Method-level synchronization can cause problems when new code is added to the method.
+			Block-level synchronization helps to ensure that only the code that needs synchronization gets it.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>//MethodDeclaration[pmd-java:modifiers() = "synchronized"]</value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			public class Foo {
+				// Try to avoid this:
+				synchronized void foo() {
+					// code, that doesn't need synchronization
+					// ...
+					// code, that requires synchronization
+					if (!sharedData.has("bar")) {
+						sharedData.add("bar");
+					}
+					// more code, that doesn't need synchronization
+					// ...
+				}
+				// Prefer this:
+				void bar() {
+					// code, that doesn't need synchronization
+					// ...
+					synchronized(this) {
+						if (!sharedData.has("bar")) {
+							sharedData.add("bar");
+						}
+					}
+					// more code, that doesn't need synchronization
+					// ...
+				}
+				// Try to avoid this for static methods:
+				static synchronized void fooStatic() {
+				}
+				// Prefer this:
+				static void barStatic() {
+					// code, that doesn't need synchronization
+					// ...
+					synchronized(Foo.class) {
+						// code, that requires synchronization
+					}
+					// more code, that doesn't need synchronization
+					// ...
+				}
+			}
+			]]></example>
+	</rule>
+	<rule name="EmptyCatchBlock" language="java" since="0.1" message="내용이 없는 Catch Block이 존재" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#emptycatchblock">
+		<description>
+			Empty Catch Block finds instances where an exception is caught, but nothing is done.
+			In most circumstances, this swallows an exception which should either be acted on
+			or reported.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					//CatchClause[
+					  Block[
+						  count(*) = 0
+						  and ($allowCommentedBlocks = false() or Block/@containsComment = false())
+					  ]
+					  and CatchParameter/VariableDeclaratorId[not(matches(@Name, $allowExceptionNameRegex))]
+					]
+					]]></value>
+			</property>
+			<property name="allowCommentedBlocks" type="Boolean" description="Empty blocks containing comments will be skipped" value="false"/>
+			<property name="allowExceptionNameRegex" type="String" description="Empty blocks catching exceptions with names matching this regular expression will be skipped" value="^(ignored|expected)$"/>
+		</properties>
+		<example>
+			<![CDATA[
+			public void doSomething() {
+				try {
+					FileInputStream fis = new FileInputStream("/tmp/bugger");
+				} catch (IOException ioe) {
+					// not good
+				}
+			}
+			]]></example>
+	</rule>
+	<!-- 
+        name : EmptyFinallyBlock, EmptyIfStmt, EmptyTryBlock, EmptyWhileStmt (remove) -> EmptyControlStatement 
+        This rule is deprecated since PMD 6.46.0 and will be removed with PMD 7.0.0.
+		Use the rule {% rule "java/codestyle/EmptyControlStatement" %} from category codestyle instead.
+    -->
+	<rule name="EmptyControlStatement" language="java" since="6.46.0" message="빈 구문의 사용을 피해야 함" class="net.sourceforge.pmd.lang.java.rule.codestyle.EmptyControlStatementRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_codestyle.html#emptycontrolstatement">
+		<!-- Note about naming: EmptyCodeBlock does not work because the rule flags `if(true);`  -->
+		<!-- EmptyControlStatement is weird because `{}` is not a control statement, and we also flag initializers. -->
+		<!-- EmptyStatement does not work because `;` is called an "empty statement" and is not flagged by this rule, rather, by UnnecessarySemicolon. -->
+		<!-- EmptyCodeConstruct would work but sounds a bit odd (right?). -->
+		<description><![CDATA[
+            Reports control statements whose body is empty, as well as empty initializers.
+            The checked code constructs are the following:
+            - bodies of `try` statements
+            - `finally` clauses of `try` statements
+            - `switch` statements
+            - `synchronized` statements
+            - `if` statements
+            - loop statements: `while`, `for`, `do .. while`
+            - initializers
+            - blocks used as statements (for scoping)
+            This rule replaces the rules EmptyFinallyBlock, 
+            EmptyIfStmt, EmptyInitializer, EmptyStatementBlock, 
+            EmptySwitchStatements, EmptySynchronizedBlock, EmptyTryBlock, and EmptyWhileStmt.
+            Notice that {% rule java/errorprone/EmptyCatchBlock %} is still an independent rule.
+            EmptyStatementNotInLoop is replaced by {% rule java/codestyle/UnnecessarySemicolon %}.
+        ]]></description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			class Foo {
+				{
+					if (true); // empty if statement
+					if (true) { // empty as well
+					}
+				}
+				{} // empty initializer
+			}
+			]]></example>
+	</rule>
+	<!-- 
+        name : EmptyStatementNotInLoop (remove) -> UnnecessarySemicolon 
+        This rule is deprecated since PMD 6.53.0 and will be removed with PMD 7.0.0.
+		Use the rule {% rule java/codestyle/UnnecessarySemicolon %} instead.
+    -->
+	<rule name="UnnecessarySemicolon" language="java" since="6.46.0" message="필요없는 문장 (;)이 있음" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_codestyle.html#unnecessarysemicolon">
+		<description>
+            Reports unnecessary semicolons (so called "empty statements" and "empty declarations").
+            These can be removed without changing the program. The Java grammar
+            allows them for historical reasons, but they should be avoided.
+            
+            This rule will not report empty statements that are syntactically 
+            required, for instance, because they are the body of a control statement.
+
+            This rule replaces EmptyStatementNotInLoop.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="version" value="2.0"/>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					  (: empty declarations :)
+					  //EmptyDeclaration
+					  (: empty statements :)
+					| //Block/EmptyStatement
+					]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			class Foo {
+				{
+					toString();; // one of these semicolons is unnecessary
+					if (true); // this semicolon is not unnecessary, but it could be an empty block instead (not reported)
+				}
+			}; // this semicolon is unnecessary
+			]]></example>
+	</rule>
+	<rule name="FinalFieldCouldBeStatic" language="java" since="1.1" message="final field를 Static 으로 변경하면 overhead 를 줄일 수 있음" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_design.html#finalfieldcouldbestatic">
+		<description>
+			If a final field is assigned to a compile-time constant, it could be made static, thus saving overhead
+			in each object at runtime.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					//FieldDeclaration
+						[pmd-java:modifiers() = 'final']
+						[not(pmd-java:modifiers() = 'static')]
+						[not(./ancestor::ClassOrInterfaceDeclaration[1][pmd-java:hasAnnotation('lombok.experimental.UtilityClass')])]
+						[not(.//Annotation[pmd-java:typeIs('lombok.Builder.Default')])]
+						/VariableDeclarator[*[pmd-java:nodeIs('Literal')]
+							 or VariableAccess[@Name = //FieldDeclaration[pmd-java:modifiers() = 'static']/VariableDeclarator/VariableDeclaratorId/@Name]
+							 or FieldAccess
+							 or ArrayAllocation/ArrayType/ArrayDimensions/ArrayDimExpr/NumericLiteral[@IntLiteral = true()][@Image = "0"]]
+						/VariableDeclaratorId
+							[not(@Name = //MethodDeclaration[not(pmd-java:modifiers() = 'static')]
+								//SynchronizedStatement/(VariableAccess|FieldAccess[ThisExpression])/@Name)]
+					]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			public class Foo {
+			  public final int BAR = 42; // this could be static and save some space
+			}
+			]]></example>
+	</rule>
+	<rule name="ImmutableField" language="java" since="2.0" message="생성자에서 Assign된 변수 ''{0}'' 를 Final로 선언하지 않았음" class="net.sourceforge.pmd.lang.java.rule.design.ImmutableFieldRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_design.html#immutablefield">
+		<description>
+			Reports non-final fields whose value never changes once object initialization ends,
+			and hence may be marked final.
+
+			Note that this rule does not enforce that the field value be deeply immutable itself.
+			An object can still have mutable state, even if all its member fields are declared final.
+			This is referred to as shallow immutability. For more information on mutability,
+			see *Effective Java, 3rd Edition, Item 17: Minimize mutability*.
+
+			Limitations: We can only check private fields for now.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public class Foo {
+			  private int x; // could be final
+			  public Foo() {
+				  x = 7;
+			  }
+			  public void foo() {
+				 int a = x + 2;
+			  }
+			}
+			]]></example>
+	</rule>
+	<!-- 
+        name : ImportFromSamePackage, DuplicateImports (remove)  -> UnnecessaryImport 
+        This rule is deprecated since PMD 6.34.0. Use the rule UnnecessaryImport from category codestyle instead.
+    -->
+	<rule name="UnnecessaryImport" language="java" since="6.34.0" message="불필요한 import ''{0}''가 사용됨" class="net.sourceforge.pmd.lang.java.rule.codestyle.UnnecessaryImportRule" typeResolution="true" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_codestyle.html#unnecessaryimport">
+		<description>
+            Reports import statements that can be removed. They are either unused,
+            duplicated, or the members they import are already implicitly in scope,
+            because they're in java.lang, or the current package.
+        </description>
+		<priority>4</priority>
+		<example>
+			<![CDATA[
+            import java.io.File;            // not used, can be removed
+            import java.util.Collections;   // used below
+            import java.util.*;             // so this one is not used
+            import java.lang.Object;        // imports from java.lang, unnecessary
+            import java.lang.Object;        // duplicate, unnecessary
+            public class Foo {
+                static Object emptyList() {
+                    return Collections.emptyList();
+                }
+            }
+            ]]></example>
+	</rule>
+	<rule name="InefficientEmptyStringCheck" language="java" since="3.6" message="Empty String 을 체크하기 위해 String.trim().length() /String.trim().isEmpty() 을 사용하는 것은 피하도록 함" class="net.sourceforge.pmd.lang.java.rule.performance.InefficientEmptyStringCheckRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_performance.html#inefficientemptystringcheck">
+		<description>
+			<![CDATA[
+			String.trim().length() == 0 (or String.trim().isEmpty() for the same reason) is an inefficient
+			way to check if a String is really blank, as it creates a new String object just to check its size.
+			Consider creating a static function that loops through a string, checking Character.isWhitespace()
+			on each character and returning false if a non-whitespace character is found. A Smarter code to
+			check for an empty string would be:
+			```java
+			private boolean checkTrimEmpty(String str) {
+				for(int i = 0; i < str.length(); i++) {
+					if(!Character.isWhitespace(str.charAt(i))) {
+						return false;
+					}
+				}
+				return true;
+			}
+			```
+			You can refer to Apache's StringUtils#isBlank (in commons-lang),
+			Spring's StringUtils#hasText (in the Spring framework) or Google's
+			CharMatcher#whitespace (in Guava) for existing implementations (some might
+			include the check for != null).
+			]]></description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public void bar(String string) {
+				if (string != null && string.trim().length() > 0) {
+					doSomething();
+				}
+			}
+			]]></example>
+	</rule>
+	<rule name="InefficientStringBuffering" language="java" since="3.4" message="StringBuffer / StringBuilder 함수 또는 append() 함수에서 nonliteral 을 직접 concatenate 하지 말 것" class="net.sourceforge.pmd.lang.java.rule.performance.InefficientStringBufferingRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_performance.html#inefficientstringbuffering">
+		<description>
+			Avoid concatenating non-literals in a StringBuffer constructor or append() since intermediate buffers will
+			need to be be created and destroyed by the JVM.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			// Avoid this, two buffers are actually being created here
+			StringBuffer sb = new StringBuffer("tmp = "+System.getProperty("java.io.tmpdir"));
+			// do this instead
+			StringBuffer sb = new StringBuffer("tmp = ");
+			sb.append(System.getProperty("java.io.tmpdir"));
+			]]></example>
+	</rule>
+	
+	<rule name="SimpleDateFormatNeedsLocale" language="java" since="2.0" message="SimpleDateFormat 인스턴스를 생성할때 Locale 을 지정하는 것이 바람직함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#simpledateformatneedslocale">
+		<description>
+			Be sure to specify a Locale when creating SimpleDateFormat instances to ensure that locale-appropriate
+			formatting is used.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					//ConstructorCall
+						[pmd-java:typeIs('java.text.SimpleDateFormat')]
+						[ArgumentList/@Size = 1]
+					]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			public class Foo {
+			  // Should specify Locale.US (or whatever)
+			  private SimpleDateFormat sdf = new SimpleDateFormat("pattern");
+			}
+			]]></example>
+	</rule>
+	<rule name="SimplifyBooleanExpressions" language="java" since="1.05" message="boolean 사용 시 불필요한 비교 연산을 피하도록 함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_design.html#simplifybooleanexpressions">
+		<description>
+			Avoid unnecessary comparisons in boolean expressions, they serve no purpose and impacts readability.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					//InfixExpression[@Operator = ("==", "!=")]/BooleanLiteral
+					]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			public class Bar {
+			  // can be simplified to
+			  // bar = isFoo();
+			  private boolean bar = (isFoo() == true);
+			  public isFoo() { return false;}
+			}
+			]]></example>
+	</rule>
+	<!--
+    	Deprecated class : net.sourceforge.pmd.lang.java.rule.performance.StringToStringRule
+    	                -> net.sourceforge.pmd.lang.rule.XPathRule						   
+    -->
+	<rule name="StringToString" language="java" since="1.0" message="String 객체에서 toString()함수를 사용하는 것은 불필요함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_performance.html#stringtostring">
+		<description>
+			Avoid calling toString() on objects already known to be string instances; this is unnecessary.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+                    //MethodCall[pmd-java:matchesSig("java.lang.String#toString()")]
+                </value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			private String baz() {
+				String bar = "howdy";
+				return bar.toString();
+			}
+			]]></example>
+	</rule>
+	<rule name="SwitchStmtsShouldHaveDefault" language="java" since="1.0" message="Switch구문에는 반드시 default label이 있어야 함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#switchstmtsshouldhavedefault">
+		<description>
+            Switch statements should be exhaustive, to make their control flow
+            easier to follow. This can be achieved by adding a `default` case, or,
+            if the switch is on an enum type, by ensuring there is one switch branch
+            for each enum constant.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+                //SwitchStatement[@DefaultCase = false() and @ExhaustiveEnumSwitch = false()]
+				]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			class Foo {{
+				int x = 2;
+				switch (x) {
+				  case 1: int j = 6;
+				  case 2: int j = 8;
+				  // missing default: here
+				}
+			}}
+			]]></example>
+	</rule>
+	<rule name="UncommentedEmptyMethodBody" language="java" since="3.4" message="빈 Method Body에 주석을 추가 할 것" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_documentation.html#uncommentedemptymethodbody">
+		<description>
+			Uncommented Empty Method Body finds instances where a method body does not contain
+			statements, but there is no comment. By explicitly commenting empty method bodies
+			it is easier to distinguish between intentional (commented) and unintentional
+			empty methods.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					//MethodDeclaration/Block[count(*) = 0 and @containsComment = false()]
+					]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			public void doSomething() {
+			}
+			]]></example>
+	</rule>
+	<!--
+    	Deprecated class : net.sourceforge.pmd.lang.java.rule.errorprone.UnnecessaryConversionTemporaryRule
+						-> net.sourceforge.pmd.lang.rule.XPathRule				   
+    -->
+	<rule name="UnnecessaryConversionTemporary" language="java" since="0.1" message="기본 데이터(primitive type)를 String으로 변환할 때 불필요한 임시 변환 작업을 피하도록 함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#unnecessaryconversiontemporary">
+		<description>
+			Avoid the use temporary objects when converting primitives to Strings. Use the static conversion methods
+			on the wrapper classes instead.
+        </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					//MethodCall[@MethodName = 'toString']
+						[ConstructorCall[position() = 1]
+							[
+								pmd-java:typeIs('java.lang.Integer')
+							 or pmd-java:typeIs('java.lang.Long')
+							 or pmd-java:typeIs('java.lang.Float')
+							 or pmd-java:typeIs('java.lang.Byte')
+							 or pmd-java:typeIs('java.lang.Double')
+							 or pmd-java:typeIs('java.lang.Short')
+							]
+						]
+					]]></value>
+			</property>
+		</properties>
+		<example>
+			<![CDATA[
+			public String convert(int x) {
+				String foo = new Integer(x).toString(); // this wastes an object
+				return Integer.toString(x);             // preferred approach
+			}
+			]]></example>
+	</rule>
+	<!-- The rule UnnecessaryParentheses has been merged into unnecessary.xml/UselessParentheses,
+         which now lives in codestyle -->
+	<rule name="UselessParentheses" language="java" since="5.0" message="괄호가 없어도 되는 상황에서 불필요한 괄호를 사용할 경우 마치 메소드 호출처럼 보여서 소스 코드의 가독성을 떨어뜨릴 수 있음" class="net.sourceforge.pmd.lang.java.rule.codestyle.UselessParenthesesRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_codestyle.html#uselessparentheses">
+		<description>
+            Parenthesized expressions are used to override the default operator precedence
+            rules. Parentheses whose removal would not change the relative nesting of operators
+            are unnecessary, because they don't change the semantics of the enclosing expression.
+
+            Some parentheses that strictly speaking are unnecessary, may still be considered useful
+            for readability. This rule allows to ignore violations on two kinds of unnecessary parentheses:
+            - "Clarifying" parentheses, which separate operators of difference precedence. While
+            unnecessary, they make precedence rules explicit, which may be useful for rarely used
+            operators. For example:
+            ```java
+                (a + b) &amp; c // is equivalent to `a + b &amp; c`, but probably clearer
+            ```
+            Unset the property `ignoreClarifying` to report them.
+
+            - "Balancing" parentheses, which are unnecessary but visually balance out another pair
+            of parentheses around an equality operator. For example, those two expressions are equivalent:
+            ```java
+                (a == null) != (b == null)
+                a == null != (b == null)
+            ```
+            The parentheses on the right are required, and the parentheses on the left are
+            just more visually pleasing. Unset the property `ignoreBalancing` to report them.
+
+        </description>
+		<priority>4</priority>
+		<example>
+			<![CDATA[
+			public class Foo {
+				{
+					int n = 0;
+					n = (n);         // here
+					n = (n * 2) * 3; // and here
+					n = n * (2 * 3); // and here
+				}
+			}
+			]]></example>
+	</rule>
+	<!--
+		UnnecessaryWrapperObjectCreation (java-performance) -> use the new rule UnnecessaryBoxing
+	-->
+	<rule name="UnnecessaryBoxing" language="java" since="7.0.0" minimumLanguageVersion="1.5" message="불필요한 {0}" class="net.sourceforge.pmd.lang.java.rule.codestyle.UnnecessaryBoxingRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_codestyle.html#unnecessaryboxing">
+		<description>
+            Reports explicit boxing and unboxing conversions that may safely be removed,
+            either because they would be inserted by the compiler automatically,
+            or because they're semantically a noop (eg unboxing a value to rebox it immediately).
+
+            Note that this only handles boxing and unboxing conversions occurring through
+            calls to `valueOf` or one of the `intValue`, `byteValue`, etc. methods. Casts
+            that command a conversion are reported by {% rule UnnecessaryCast %} instead.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			{
+			// Instead of
+			Integer integer = Integer.valueOf(2);
+			// you may just write
+			Integer integer = 2;
+			int i = integer.intValue(); // similarly for unboxing
+			// Instead of
+			int x = Integer.valueOf("42");
+			// you may just write
+			int x = Integer.parseInt("42");
+				}
+				]]></example>
+	</rule>
+	<!--
+    	Deprecated class : net.sourceforge.pmd.lang.java.rule.bestpractices.UnusedPrivateFieldRule
+    	                -> net.sourceforge.pmd.lang.java.rule.bestpractices.UnusedFormalParameterRule         
+    -->
+	<rule name="UnusedFormalParameter" language="java" since="0.8" message="''{1}'' 처럼  사용되지 않는  ''{0}'' 파라미터가 있음" class="net.sourceforge.pmd.lang.java.rule.bestpractices.UnusedFormalParameterRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#unusedformalparameter">
+		<description>
+			Reports parameters of methods and constructors that are not referenced them in the method body.
+			Parameters whose name starts with `ignored` or `unused` are filtered out.
+
+			Removing unused formal parameters from public methods could cause a ripple effect through the code base.
+			Hence, by default, this rule only considers private methods. To include non-private methods, set the
+			`checkAll` property to `true`.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public class Foo {
+				private void bar(String howdy) {
+					// howdy is not used
+				}
+			}
+			]]></example>
+	</rule>
+	<rule name="UnusedPrivateField" since="0.1" language="java" message="사용되지 않는 Private field ''{0}'' 가 선언되었음" class="net.sourceforge.pmd.lang.java.rule.bestpractices.UnusedPrivateFieldRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#unusedprivatefield">
+		<description>
+			Detects when a private field is declared and/or assigned a value, but not used.
+
+			Since PMD 6.50.0 private fields are ignored, if the fields are annotated with any annotation or the
+			enclosing class has any annotation. Annotations often enable a framework (such as dependency injection, mocking
+			or e.g. Lombok) which use the fields by reflection or other means. This usage can't be detected by static code analysis.
+			Previously these frameworks where explicitly allowed by listing their annotations in the property
+			"ignoredAnnotations", but that turned out to be prone of false positive for any not explicitly considered framework.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public class Something {
+				private static int FOO = 2; // Unused
+				private int i = 5; // Unused
+				private int j = 6;
+				public int addOne() {
+					return j++;
+				}
+			}
+			]]></example>
+	</rule>
+	<rule name="UnusedPrivateMethod" language="java" since="0.7" message="사용되지 않는 Private Method ''{0}'' 가 선언되었음" class="net.sourceforge.pmd.lang.java.rule.bestpractices.UnusedPrivateMethodRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#unusedprivatemethod">
+		<description>
+			Unused Private Method detects when a private method is declared but is unused.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public class Something {
+				private void foo() {} // unused
+			}
+			]]></example>
+	</rule>
+	<rule name="UselessStringValueOf" language="java" since="3.8" message="String 을 append 할 경우, String.valueOf 함수를 사용할 필요 없음" class="net.sourceforge.pmd.lang.java.rule.performance.UselessStringValueOfRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_performance.html#uselessstringvalueof">
+		<description>
+			No need to call String.valueOf to append to a string; just use the valueOf() argument directly.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public String convert(int i) {
+				String s;
+				s = "a" + String.valueOf(i);    // not required
+				s = "a" + i;                    // preferred approach
+				return s;
+			}
+			]]></example>
+	</rule>
+	<rule name="SystemPrintln" language="java" since="2.1" message="System.out.print 가 사용됨" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#systemprintln">
+		<description>
+			References to System.(out|err).print are usually intended for debugging purposes and can remain in
+			the codebase even in production code. By using a logger one can enable/disable this behaviour at
+			will (and by priority) and avoid clogging the Standard out log.
+        </description>
+		<priority>2</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+					<![CDATA[
+					//MethodCall[ starts-with(@MethodName, 'print') ]
+					  /FieldAccess[ @Name = ('err', 'out') ]
+					  /TypeExpression[ pmd-java:typeIsExactly('java.lang.System') ]
+					]]></value>
+			</property>
+		</properties>
+		<example>
+			 <![CDATA[
+			class Foo{
+				Logger log = Logger.getLogger(Foo.class.getName());
+				public void testA () {
+					System.out.println("Entering test");
+					// Better use this
+					log.fine("Entering test");
+				}
+			}
+			]]></example>
+	</rule>
+	<rule name="AvoidUsingHardCodedIP" language="java" since="4.1" message="하드코딩된 IP 주소 ${variableName} 사용" class="net.sourceforge.pmd.lang.java.rule.bestpractices.AvoidUsingHardCodedIPRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#avoidusinghardcodedip">
+		<description>
+			Application with hard-coded IP addresses can become impossible to deploy in some cases.
+			Externalizing IP adresses is preferable.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public class Foo {
+				private String ip = "127.0.0.1";     // not recommended
+			}
+			]]></example>
+	</rule>
+	<rule name="HardCodedCryptoKey" language="java" since="6.4.0" message="하드코딩된 암호화 키 사용 안 함" class="net.sourceforge.pmd.lang.java.rule.security.HardCodedCryptoKeyRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_security.html#hardcodedcryptokey">
+		<description>
+			Do not use hard coded values for cryptographic operations. Please store keys outside of source code.
+        </description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public class Foo {
+				void good() {
+					SecretKeySpec secretKeySpec = new SecretKeySpec(Properties.getKey(), "AES");
+				}
+
+				void bad() {
+					SecretKeySpec secretKeySpec = new SecretKeySpec("my secret here".getBytes(), "AES");
+				}
+			}
+			]]></example>
+	</rule>
+	<rule name="AvoidPrintStackTrace" language="java" since="3.2" message="printStackTrace()를 사용하는 대신 로거 호출을 사용해야함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#avoidprintstacktrace">
+		<description>
+			Avoid printStackTrace(); use a logger call instead.
+		</description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+				//MethodCall[ pmd-java:matchesSig("java.lang.Throwable#printStackTrace()") ]
+				]]></value>
+			</property>
+		</properties>
+		<example>
+		<![CDATA[
+		class Foo {
+			void bar() {
+				try {
+					// do something
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		]]></example>
+	</rule>
+	<rule name="EmptyCatchBlock" language="java" since="0.1" message="빈 캐치블록 사용을 피해야 함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#emptycatchblock">
+		<description>
+			Empty Catch Block finds instances where an exception is caught, but nothing is done.
+			In most circumstances, this swallows an exception which should either be acted on
+			or reported.
+		</description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+				//CatchClause[
+				  Block[
+					  count(*) = 0
+					  and ($allowCommentedBlocks = false() or Block/@containsComment = false())
+				  ]
+				  and CatchParameter/VariableDeclaratorId[not(matches(@Name, $allowExceptionNameRegex))]
+				]
+				]]></value>
+			</property>
+			<property name="allowCommentedBlocks" type="Boolean" description="Empty blocks containing comments will be skipped" value="false"/>
+			<property name="allowExceptionNameRegex" type="String" description="Empty blocks catching exceptions with names matching this regular expression will be skipped" value="^(ignored|expected)$"/>
+		</properties>
+		<example>
+		<![CDATA[
+		public void doSomething() {
+			try {
+				FileInputStream fis = new FileInputStream("/tmp/bugger");
+			} catch (IOException ioe) {
+				// not good
+			}
+		}
+		]]></example>
+	</rule>
+	<rule name="AvoidCatchingGenericException" since="4.2.6" language="java" message="Exception in try-catch block, NullPointerException, RuntimeException을 일반 예외로 잡는 것을 피해야 함" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_design.html#avoidcatchinggenericexception">
+		<description>
+			void catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block.
+		</description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+				//CatchParameter//ClassOrInterfaceType[
+					pmd-java:typeIsExactly('java.lang.NullPointerException') or
+					pmd-java:typeIsExactly('java.lang.Exception') or
+					pmd-java:typeIsExactly('java.lang.RuntimeException')]
+				]]></value>
+			</property>
+		</properties>
+		<example>
+		<![CDATA[
+		package com.igate.primitive;
+			public class PrimitiveType {
+				public void downCastPrimitiveType() {
+					try {
+						System.out.println(" i [" + i + "]");
+					} catch(Exception e) {
+						e.printStackTrace();
+					} catch(RuntimeException e) {
+						e.printStackTrace();
+					} catch(NullPointerException e) {
+						e.printStackTrace();
+					}
+			}
+		}
+		]]></example>
+	</rule>
+	<rule name="BrokenNullCheck" language="java" since="3.8" message="NullPointerException을 throw하는 표현식" class="net.sourceforge.pmd.lang.java.rule.errorprone.BrokenNullCheckRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#brokennullcheck">
+		<description>
+			The null check is broken since it will throw a NullPointerException itself.
+			It is likely that you used || instead of &amp;&amp; or vice versa.
+		</description>
+		<priority>2</priority>
+		<example>
+		<![CDATA[
+		public String bar(String string) {
+		  // should be &&
+			if (string!=null || !string.equals(""))
+				return string;
+		  // should be ||
+			if (string==null && string.equals(""))
+				return string;
+		}
+		]]></example>
+	</rule>
+	<rule name="MisplacedNullCheck" language="java" since="3.5" message="널체크 위치가 잘못됨. 변수''{0}''가 null이면 NullPointerException 발생" class="net.sourceforge.pmd.lang.rule.XPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#misplacednullcheck">
+		<description>
+			The null check here is misplaced. If the variable is null a `NullPointerException` will be thrown.
+			Either the check is useless (the variable will never be `null`) or it is incorrect.
+		</description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+				//InfixExpression[@Operator = '&&']
+					/InfixExpression[@Operator = '!=']
+						(: one side is null :)
+						[NullLiteral]
+						(: other side checks for the variable used somewhere in the first child of conditional and expression :)
+						[VariableAccess]
+						[some $var in preceding-sibling::*//VariableAccess
+							[parent::MethodCall or parent::FieldAccess]
+							[not(ancestor::InfixExpression[@Operator = '||'])]
+							/@Name
+							satisfies $var = VariableAccess/@Name
+						]
+					/VariableAccess
+				|
+				//InfixExpression[@Operator = '||']
+					/InfixExpression[@Operator = '==']
+						(: one side is null :)
+						[NullLiteral]
+						(: other side checks for the variable used somewhere in the first child of conditional or expression :)
+						[VariableAccess]
+						[some $var in preceding-sibling::*//VariableAccess
+							[parent::MethodCall or parent::FieldAccess]
+							[not(ancestor::InfixExpression[@Operator = '&&'])]
+							/@Name
+							satisfies $var = VariableAccess/@Name
+						]
+					/VariableAccess
+				]]></value>
+			</property>
+		</properties>
+		<example>
+		<![CDATA[
+		public class Foo {
+			void bar() {
+				if (a.equals(baz) && a != null) {} // a could be null, misplaced null check
+				if (a != null && a.equals(baz)) {} // correct null check
+			}
+		}
+		]]></example>
+		<example>
+		<![CDATA[
+		public class Foo {
+			void bar() {
+				if (a.equals(baz) || a == null) {} // a could be null, misplaced null check
+					if (a == null || a.equals(baz)) {} // correct null check
+			}
+		}
+		]]></example>
+	</rule>
+	<rule name="CloseResource" language="java" since="1.2.2" message="리소스 ''{0}'' 가 사용 후에 닫혔는지 확인필요" class="net.sourceforge.pmd.lang.java.rule.errorprone.CloseResourceRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_errorprone.html#closeresource">
+		<description>
+			Ensure that resources (like `java.sql.Connection`, `java.sql.Statement`, and `java.sql.ResultSet` objects
+			and any subtype of `java.lang.AutoCloseable`) are always closed after use.
+			Failing to do so might result in resource leaks.
+
+			Note: It suffices to configure the super type, e.g. `java.lang.AutoClosable`, so that this rule automatically triggers
+			on any subtype (e.g. `java.io.FileInputStream`). Additionally specifying `java.sql.Connection` helps in detecting
+			the types, if the type resolution / auxclasspath is not correctly setup.
+
+			Note: Since PMD 6.16.0 the default value for the property `types` contains `java.lang.AutoCloseable` and detects
+			now cases where the standard `java.io.*Stream` classes are involved. In order to restore the old behaviour,
+			just remove "AutoCloseable" from the types.
+		</description>
+		<priority>3</priority>
+		<example>
+		<![CDATA[
+		public class Bar {
+			public void withSQL() {
+				Connection c = pool.getConnection();
+				try {
+					// do stuff
+				} catch (SQLException ex) {
+				   // handle exception
+				} finally {
+					// oops, should close the connection using 'close'!
+					// c.close();
+				}
+			}
+
+			public void withFile() {
+				InputStream file = new FileInputStream(new File("/tmp/foo"));
+				try {
+					int c = file.in();
+				} catch (IOException e) {
+					// handle exception
+				} finally {
+					// TODO: close file
+				}
+			}
+		}
+		]]></example>
+	</rule>
+	<rule name="ArrayIsStoredDirectly" language="java" since="2.2" message="배열 ''{0}'' 이 직접 저장되어 있음" class="net.sourceforge.pmd.lang.java.rule.bestpractices.ArrayIsStoredDirectlyRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#arrayisstoreddirectly">
+		<description>
+			Constructors and methods receiving arrays should clone objects and store the copy.
+			This prevents future changes from the user from affecting the original array.
+		</description>
+		<priority>3</priority>
+		<example> 
+		<![CDATA[
+		public class Foo {
+			private String [] x;
+				public void foo (String [] param) {
+				// Don't do this, make a copy of the array at least
+				this.x=param;
+			}
+		}
+		]]></example>
+	</rule>
+	<rule name="MethodReturnsInternalArray" language="java" since="2.2" message="''{0}''을 반환하면 내부 배열이 노출될 수 있음" class="net.sourceforge.pmd.lang.java.rule.bestpractices.MethodReturnsInternalArrayRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_java_bestpractices.html#methodreturnsinternalarray">
+		<description>
+			Exposing internal arrays to the caller violates object encapsulation since elements can be
+			removed or replaced outside of the object that owns it. It is safer to return a copy of the array.
+		</description>
+		<priority>3</priority>
+		<example>
+			<![CDATA[
+			public class SecureSystem {
+				UserData [] ud;
+				public UserData [] getUserData() {
+					// Don't return directly the internal array, return a copy
+					return ud;
+				}
+			}
+			]]></example>
+	</rule>
+</ruleset>
