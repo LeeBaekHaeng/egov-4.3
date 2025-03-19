@@ -631,7 +631,7 @@
 				<version>3.3.0</version>
                 <configuration>
                     <skipTests>true</skipTests>
-                    <forkMode>once</forkMode>
+                    <!-- <forkMode>once</forkMode> -->
                     <reportFormat>xml</reportFormat>
                     <excludes>
                         <exclude>**/Abstract*.java</exclude>
