@@ -75,8 +75,8 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginPolicy - 로그인정책 model
 	 */
-	public void updateLoginPolicy(LoginPolicy loginPolicy) throws Exception {
-		update("loginPolicyDAO.updateLoginPolicy", loginPolicy);
+	public int updateLoginPolicy(LoginPolicy loginPolicy) {
+		return update("loginPolicyDAO.updateLoginPolicy", loginPolicy);
 	}
 
 	/**

@@ -25,7 +25,7 @@ class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 	private EgovPropertyService propertiesService;
 
 	/**
-	 * 등록 insert공통표준단어
+	 * 등록 insert[공통표준단어]
 	 */
 	@Test
 //	@Commit
@@ -102,7 +102,7 @@ class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 	}
 
 	/**
-	 * 조회(단건) select공통표준단어
+	 * 조회(단건) select[공통표준단어]
 	 */
 	@Test
 	void testB10selectLoginPolicy() {
@@ -143,7 +143,7 @@ class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 	}
 
 	/**
-	 * 조회(멀티건) select공통표준단어List
+	 * 조회(멀티건) select[공통표준단어]List
 	 */
 	@Test
 	void testC10selectLoginPolicyList() {
@@ -206,6 +206,45 @@ class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 		assertEquals(1, totCnt);
 
 		log.debug("totCnt={}, {}", 1, totCnt);
+	}
+
+	/**
+	 * 수정 update[공통표준단어]
+	 */
+	@Test
+	void testD10updateLoginPolicy() {
+		LoginPolicy testData = testData();
+
+		// given
+		LoginPolicy loginPolicy = new LoginPolicy();
+		// NOT NULL
+		loginPolicy.setEmplyrId(testData.getEmplyrId());
+		loginPolicy.setIpInfo("127.0.0.2");
+		loginPolicy.setDplctPermAt("N");
+		loginPolicy.setLmttAt("N");
+		// NULL
+		LoginVO loginVO = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+		if (loginVO != null) {
+			// MBER_ID/ENTRPRS_MBER_ID/EMPLYR_ID
+			// 회원ID/기업회원ID/업무사용자ID
+			// 최초등록자ID, 최종수정자ID
+//			loginPolicy.setUserId(loginVO.getId());
+
+			// ESNTL_ID, 고유ID, 최초등록자ID, 최종수정자ID
+			loginPolicy.setUserId(loginVO.getUniqId());
+		}
+
+		log.debug("loginPolicy={}", loginPolicy);
+
+		// when
+		int result = loginPolicyDAO.updateLoginPolicy(loginPolicy);
+
+		log.debug("result={}", result);
+
+		// then
+		assertEquals(1, result);
+
+		log.debug("result={}, {}", 1, result);
 	}
 
 }
