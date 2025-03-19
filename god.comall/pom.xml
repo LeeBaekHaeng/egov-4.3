@@ -657,12 +657,12 @@
                 </configuration>
             </plugin>
             -->
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>emma-maven-plugin</artifactId>
 				<version>1.0-alpha-3</version>
 				<inherited>true</inherited>
-			</plugin>
+			</plugin> -->
 			<!--  JavaDoc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
