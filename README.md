@@ -385,3 +385,79 @@ public class EgovEnvCryptoUserTest {
 
 ## 단위 테스트
 
+## Tibero 7, Tibero 6
+
+주제별 > 개발 > CLI > CLI, ODBC 드라이버 연결 > 드라이버 연결 가이드
+- JDBC 연결
+- https://docs.tmaxtibero.com/tibero/topics/development/cli/cli-odbc-driver-connection/driver-connection-guide/jdbc
+
+Tibero Studio (JDK 1.8)  다운로드
+- https://technet.tmax.co.kr/ko/front/download/viewDownload.do?cmProductCode=0301&version_seq=PVER-20170425-000001&doc_type_cd=DN
+
+C:\Tibero\tibero6\client\lib\jar
+- tibero6-jdbc.jar
+- tibero6-jdbc-14.jar
+- tibero6-jdbc-18.jar
+
+공통컴포넌트
+
+```
+C:\EGOVFRAMEDEV-4.3.0-64BIT\eGovFrameDev-4.3.0-64bit\workspace-egov\git\egov-4.3\god.com\src\main\webapp\WEB-INF\lib\project\tibero5\5.0.0
+```
+
+tibero5-5.0.0.jar
+
+티베로 sys 접속
+
+Alias
+```
+sys
+```
+
+IP
+```
+localhost
+```
+
+Port
+```
+8629
+```
+
+User
+```
+sys
+```
+
+Password
+```
+tibero
+```
+
+DB Name
+```
+tibero
+```
+
+DBeaver 티베로 접속
+
+```
+C:\EGOVFRAMEDEV-4.3.0-64BIT\dbeaver-ce-25.0.0-win32.win32.x86_64\drivers\Tibero\tibero6
+```
+
+- tibero6-jdbc.jar
+- tibero6-jdbc-14.jar
+- tibero6-jdbc-18.jar
+
+dbeaver 티베로 연결
+
+Settings탭의 Tibero 드라이버 세팅하기
+
+```
+Driver Name : Tibero
+Class Name : com.tmax.tibero.jdbc.TbDriver
+URL Template : jdbc:tibero:thin:@{host}[:{port}]:{database}
+example : jdbc:tibero:thin:@127.0.0.1:8629:tibero_sid (7번그림 참고)
+Default Port : 8629
+출처: https://javaoop.tistory.com/91 [개쿠:티스토리]
+```
