@@ -37,7 +37,7 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * @param loginPolicyVO - 로그인정책 VO
 	 * @return List - 로그인정책 목록
 	 */
-	public List<LoginPolicyVO> selectLoginPolicyList(LoginPolicyVO loginPolicyVO) throws Exception {
+	public List<LoginPolicyVO> selectLoginPolicyList(LoginPolicyVO loginPolicyVO) {
 		return selectList("loginPolicyDAO.selectLoginPolicyList", loginPolicyVO);
 	}
 
@@ -47,8 +47,8 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * @param loginPolicyVO - 로그인정책 VO
 	 * @return int
 	 */
-	public int selectLoginPolicyListTotCnt(LoginPolicyVO loginPolicyVO) throws Exception {
-		return (Integer) selectOne("loginPolicyDAO.selectLoginPolicyListTotCnt", loginPolicyVO);
+	public int selectLoginPolicyListTotCnt(LoginPolicyVO loginPolicyVO) {
+		return selectOne("loginPolicyDAO.selectLoginPolicyListTotCnt", loginPolicyVO);
 	}
 
 	/**
