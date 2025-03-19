@@ -19,13 +19,53 @@ public class TestLgnplcyVO extends TestLgnplcyDefaultVO {
 	 */
 	private String emplyrId;
 
-//	  
-//	  `IP_INFO` varchar(23) NOT NULL COMMENT 'IP정보',
-//	  `DPLCT_PERM_AT` char(1) NOT NULL COMMENT '중복허용여부',
-//	  `LMTT_AT` char(1) NOT NULL COMMENT '제한여부',
-//	  `FRST_REGISTER_ID` varchar(20) DEFAULT NULL COMMENT '최초등록자ID',
-//	  `FRST_REGIST_PNTTM` datetime DEFAULT NULL COMMENT '최초등록시점',
-//	  `LAST_UPDUSR_ID` varchar(20) DEFAULT NULL COMMENT '최종수정자ID',
-//	  `LAST_UPDT_PNTTM` datetime DEFAULT NULL COMMENT '최종수정시점',
+	/**
+	 * IP정보
+	 * 
+	 * @컬럼 `IP_INFO` varchar(23) NOT NULL COMMENT 'IP정보',
+	 */
+	private String ipInfo;
+
+	/**
+	 * 중복허용여부
+	 * 
+	 * @컬럼 `DPLCT_PERM_AT` char(1) NOT NULL COMMENT '중복허용여부',
+	 */
+	private String dplctPermAt;
+
+	/**
+	 * 제한여부
+	 * 
+	 * @컬럼 `LMTT_AT` char(1) NOT NULL COMMENT '제한여부',
+	 */
+	private String lmttAt;
+
+	/**
+	 * 최초등록자ID
+	 * 
+	 * @컬럼 `FRST_REGISTER_ID` varchar(20) DEFAULT NULL COMMENT '최초등록자ID',
+	 */
+	private String frstRegisterId;
+
+	/**
+	 * 최초등록시점
+	 * 
+	 * @컬럼 `FRST_REGIST_PNTTM` datetime DEFAULT NULL COMMENT '최초등록시점',
+	 */
+	private String frstRegistPnttm;
+
+	/**
+	 * 최종수정자ID
+	 * 
+	 * @컬럼 `LAST_UPDUSR_ID` varchar(20) DEFAULT NULL COMMENT '최종수정자ID',
+	 */
+	private String lastUpdusrId;
+
+	/**
+	 * 최종수정시점
+	 * 
+	 * @컬럼 `LAST_UPDT_PNTTM` datetime DEFAULT NULL COMMENT '최종수정시점',
+	 */
+	private String lastUpdtPnttm;
 
 }
