@@ -25,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import egovframework.com.cmm.service.EgovProperties;
-import egovframework.com.sym.ccm.acr.service.impl.EgovAdministCodeRecptnServiceImpl;
 import egovframework.com.sym.ccm.icr.service.EgovInsttCodeRecptnService;
 import egovframework.com.sym.ccm.icr.service.InsttCodeRecptn;
 import egovframework.com.sym.ccm.icr.service.InsttCodeRecptnVO;
@@ -33,12 +32,13 @@ import egovframework.com.sym.ccm.icr.service.InsttCodeRecptnVO;
 /**
  *
  * 기관코드에 대한 서비스 구현클래스를 정의한다.
+ * 
  * @author 공통서비스 개발팀 이중호
  * @since 2009.04.01
  * @version 1.0
  * @see
  *
- * <pre>
+ *      <pre>
  * << 개정이력(Modification Information) >>
  *
  *   수정일      수정자           수정내용
@@ -51,13 +51,13 @@ import egovframework.com.sym.ccm.icr.service.InsttCodeRecptnVO;
  *   2023.08.10  정진오          기관코드수신 방식 수정(공공데이터포털 이용)
  *
  * Copyright (C) 2009 by MOPAS  All right reserved.
- * </pre>
+ *      </pre>
  */
 @Service("InsttCodeRecptnService")
 public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl implements EgovInsttCodeRecptnService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EgovInsttCodeRecptnServiceImpl.class);
-	
+
 	@Resource(name = "InsttCodeRecptnDAO")
 	private InsttCodeRecptnDAO insttCodeRecptnDAO;
 
@@ -68,12 +68,16 @@ public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl impl
 	/**
 	 * 기관코드수신을 처리한다.
 	 */
+	@Override
 	public void insertInsttCodeRecptn() throws Exception {
 		List<HashMap<String, String>> list = apiLink();
-		for(int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size(); i++) {
 			HashMap<String, String> row = list.get(i);
 			InsttCodeRecptn insttCodeRecptn = new InsttCodeRecptn();
-			insttCodeRecptn.setOccrrDe(ObjectUtils.isEmpty(row.get("crtDe")) ? "20000101" : row.get("crtDe")); // 날짜 >> crt_de 생성일 x 20000101
+			insttCodeRecptn.setOccrrDe(ObjectUtils.isEmpty(row.get("crtDe")) ? "20000101" : row.get("crtDe")); // 날짜 >>
+																												// crt_de
+																												// 생성일 x
+																												// 20000101
 			insttCodeRecptn.setInsttCode(row.get("orgCd")); // 기관코드 >> org_cd 기관코드
 			insttCodeRecptn.setOpertSn(idgenService.getNextIntegerId()); // 작업일련번호 >> idgenService.getNextIntegerId()
 			insttCodeRecptn.setChangeSeCode("01"); // 변경구분코드 01 코드생성 02 코드변경 03 코드말소 >> 01 / 02
@@ -122,14 +126,19 @@ public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl impl
 	public static String requestString(int pageNo, int numOfRows) throws IOException {
 		String serviceKey = EgovProperties.getProperty("Globals.data.serviceKey");
 		StringBuilder sb = new StringBuilder();
-		sb.append("http://apis.data.go.kr/1741000/StanOrgCd2/getStanOrgCdList2"); /*URL*/
-		sb.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + serviceKey); /*Service Key*/
-		sb.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(Integer.toString(pageNo), "UTF-8")); /*페이지번호*/
-		sb.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode(Integer.toString(numOfRows), "UTF-8")); /*한 페이지 결과 수*/
-		sb.append("&" + URLEncoder.encode("type","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
-		sb.append("&" + URLEncoder.encode("full_nm","UTF-8") + "=" + URLEncoder.encode("행정안전부", "UTF-8")); /*기관명(옵션)*/
-		sb.append("&" + URLEncoder.encode("stop_selt","UTF-8") + "=" + URLEncoder.encode("0", "UTF-8")); /*사용:0, 폐지:1(옵션)*/
-        return sb.toString();
+		sb.append("http://apis.data.go.kr/1741000/StanOrgCd2/getStanOrgCdList2"); /* URL */
+		sb.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
+		sb.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "="
+				+ URLEncoder.encode(Integer.toString(pageNo), "UTF-8")); /* 페이지번호 */
+		sb.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
+				+ URLEncoder.encode(Integer.toString(numOfRows), "UTF-8")); /* 한 페이지 결과 수 */
+		sb.append("&" + URLEncoder.encode("type", "UTF-8") + "="
+				+ URLEncoder.encode("JSON", "UTF-8")); /* 요청자료형식(XML/JSON) Default: XML */
+		sb.append(
+				"&" + URLEncoder.encode("full_nm", "UTF-8") + "=" + URLEncoder.encode("행정안전부", "UTF-8")); /* 기관명(옵션) */
+		sb.append("&" + URLEncoder.encode("stop_selt", "UTF-8") + "="
+				+ URLEncoder.encode("0", "UTF-8")); /* 사용:0, 폐지:1(옵션) */
+		return sb.toString();
 	}
 
 	/**
@@ -140,41 +149,41 @@ public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl impl
 
 		String requestString = requestString(1, 1);
 
-        URL url = new URL(requestString);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		URL url = new URL(requestString);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Content-Type", "application/json");
 		conn.setRequestProperty("Accept", "*/*;q=0.9");
 		conn.setDoOutput(true);
 		conn.setUseCaches(false);
 
-        BufferedReader br;
-        if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+		BufferedReader br;
+		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
 
-        	br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        	StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-            br.close();
+			br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+			br.close();
 
-            JSONParser jsonParser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(sb.toString());
-            JSONArray jsonArray = (JSONArray) jsonObject.get("StanOrgCd");
-            JSONObject headObject = (JSONObject) jsonArray.get(0);
-            JSONArray headArray = (JSONArray) headObject.get("head");
-            JSONObject object = (JSONObject) headArray.get(0);
-    		int totalCount = Integer.parseInt(object.get("totalCount").toString());
-    		pageNo = (int) Math.ceil((double) totalCount/1000);
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(sb.toString());
+			JSONArray jsonArray = (JSONArray) jsonObject.get("StanOrgCd");
+			JSONObject headObject = (JSONObject) jsonArray.get(0);
+			JSONArray headArray = (JSONArray) headObject.get("head");
+			JSONObject object = (JSONObject) headArray.get(0);
+			int totalCount = Integer.parseInt(object.get("totalCount").toString());
+			pageNo = (int) Math.ceil((double) totalCount / 1000);
 
-        } else {
-        	LOGGER.debug("##### InsttCodeRecptnService.numberOfRows() Error Code >>> " + conn.getResponseCode());
-        }
+		} else {
+			LOGGER.debug("##### InsttCodeRecptnService.numberOfRows() Error Code >>> " + conn.getResponseCode());
+		}
 
-        conn.disconnect();
+		conn.disconnect();
 
-        return pageNo;
+		return pageNo;
 	}
 
 	/**
@@ -200,59 +209,59 @@ public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl impl
 			conn.setDoOutput(true);
 			conn.setUseCaches(false);
 
-	        BufferedReader br;
-	        if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+			BufferedReader br;
+			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
 
-	        	br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	        	StringBuilder sb = new StringBuilder();
-	            String line;
-	            while ((line = br.readLine()) != null) {
-	                sb.append(line);
-	            }
-	            br.close();
+				br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line;
+				while ((line = br.readLine()) != null) {
+					sb.append(line);
+				}
+				br.close();
 
-	            JSONParser jsonParser = new JSONParser();
-	            JSONObject jsonObject = (JSONObject) jsonParser.parse(sb.toString());
-	            JSONArray jsonArray = (JSONArray) jsonObject.get("StanOrgCd");
-	            JSONObject bodyObject = (JSONObject) jsonArray.get(1);
-	            JSONArray row = (JSONArray) bodyObject.get("row");
+				JSONParser jsonParser = new JSONParser();
+				JSONObject jsonObject = (JSONObject) jsonParser.parse(sb.toString());
+				JSONArray jsonArray = (JSONArray) jsonObject.get("StanOrgCd");
+				JSONObject bodyObject = (JSONObject) jsonArray.get(1);
+				JSONArray row = (JSONArray) bodyObject.get("row");
 
-	            for (int r = 0; r < row.size(); r++) {
-	            	JSONObject object = (JSONObject) row.get(r);
-	            	HashMap<String, String> organizationCode = new HashMap<>();
-	            	organizationCode.put("orgCd", stringValueOf(object.get("org_cd")));
-	    			organizationCode.put("fullNm",stringValueOf(object.get("full_nm")));
-	    			organizationCode.put("lowNm", stringValueOf(object.get("low_nm")));
-	    			organizationCode.put("abbrNm", stringValueOf(object.get("abbr_nm")));
-	    			organizationCode.put("gapNo", stringValueOf(object.get("gap_no")));
-	    			organizationCode.put("rankNo", stringValueOf(object.get("rank_no")));
-	    			organizationCode.put("subChasu", stringValueOf(object.get("sub_chasu")));
-	    			organizationCode.put("highCd", stringValueOf(object.get("high_cd")));
-	    			organizationCode.put("highstCd", stringValueOf(object.get("highst_cd")));
-	    			organizationCode.put("repCd", stringValueOf(object.get("rep_cd")));
-	    			organizationCode.put("typebigNm", stringValueOf(object.get("typebig_nm")));
-	    			organizationCode.put("typemidNm",  stringValueOf(object.get("typemid_nm")));
-	    			organizationCode.put("typesmlNm",  stringValueOf(object.get("typesml_nm")));
-	    			organizationCode.put("locatstdCd", stringValueOf(object.get("locatstd_cd")));
-	    			organizationCode.put("useCd", stringValueOf(object.get("use_cd")));
-	    			organizationCode.put("crtDe", stringValueOf(object.get("crt_de")));
-	    			organizationCode.put("clsDe", stringValueOf(object.get("cls_de")));
-	    			organizationCode.put("stopSelt", stringValueOf(object.get("stop_selt")));
-	    			organizationCode.put("chgDe", stringValueOf(object.get("chg_de")));
-	    			organizationCode.put("baseDate", stringValueOf(object.get("base_date")));
-	    			organizationCode.put("adptDate", stringValueOf(object.get("adpt_date")));
-	    			organizationCode.put("preorgCd", stringValueOf(object.get("preorg_cd")));
-	    			organizationCodeList.add(organizationCode);
-	    		}
+				for (int r = 0; r < row.size(); r++) {
+					JSONObject object = (JSONObject) row.get(r);
+					HashMap<String, String> organizationCode = new HashMap<>();
+					organizationCode.put("orgCd", stringValueOf(object.get("org_cd")));
+					organizationCode.put("fullNm", stringValueOf(object.get("full_nm")));
+					organizationCode.put("lowNm", stringValueOf(object.get("low_nm")));
+					organizationCode.put("abbrNm", stringValueOf(object.get("abbr_nm")));
+					organizationCode.put("gapNo", stringValueOf(object.get("gap_no")));
+					organizationCode.put("rankNo", stringValueOf(object.get("rank_no")));
+					organizationCode.put("subChasu", stringValueOf(object.get("sub_chasu")));
+					organizationCode.put("highCd", stringValueOf(object.get("high_cd")));
+					organizationCode.put("highstCd", stringValueOf(object.get("highst_cd")));
+					organizationCode.put("repCd", stringValueOf(object.get("rep_cd")));
+					organizationCode.put("typebigNm", stringValueOf(object.get("typebig_nm")));
+					organizationCode.put("typemidNm", stringValueOf(object.get("typemid_nm")));
+					organizationCode.put("typesmlNm", stringValueOf(object.get("typesml_nm")));
+					organizationCode.put("locatstdCd", stringValueOf(object.get("locatstd_cd")));
+					organizationCode.put("useCd", stringValueOf(object.get("use_cd")));
+					organizationCode.put("crtDe", stringValueOf(object.get("crt_de")));
+					organizationCode.put("clsDe", stringValueOf(object.get("cls_de")));
+					organizationCode.put("stopSelt", stringValueOf(object.get("stop_selt")));
+					organizationCode.put("chgDe", stringValueOf(object.get("chg_de")));
+					organizationCode.put("baseDate", stringValueOf(object.get("base_date")));
+					organizationCode.put("adptDate", stringValueOf(object.get("adpt_date")));
+					organizationCode.put("preorgCd", stringValueOf(object.get("preorg_cd")));
+					organizationCodeList.add(organizationCode);
+				}
 
-	        } else {
-	        	LOGGER.debug("##### InsttCodeRecptnService.apiLink() Error Code >>> " + conn.getResponseCode());
-	        }
+			} else {
+				LOGGER.debug("##### InsttCodeRecptnService.apiLink() Error Code >>> " + conn.getResponseCode());
+			}
 
-	        conn.disconnect();
+			conn.disconnect();
 		}
 
-        return organizationCodeList;
+		return organizationCodeList;
 	}
 
 	private static String stringValueOf(Object object) {
@@ -262,14 +271,16 @@ public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl impl
 	/**
 	 * 기관코드 상세내역을 조회한다.
 	 */
+	@Override
 	public InsttCodeRecptn selectInsttCodeDetail(InsttCodeRecptn insttCodeRecptn) throws Exception {
-		InsttCodeRecptn ret = (InsttCodeRecptn) insttCodeRecptnDAO.selectInsttCodeDetail(insttCodeRecptn);
+		InsttCodeRecptn ret = insttCodeRecptnDAO.selectInsttCodeDetail(insttCodeRecptn);
 		return ret;
 	}
 
 	/**
 	 * 기관코드수신 목록을 조회한다.
 	 */
+	@Override
 	public List<EgovMap> selectInsttCodeRecptnList(InsttCodeRecptnVO searchVO) throws Exception {
 		return insttCodeRecptnDAO.selectInsttCodeRecptnList(searchVO);
 	}
@@ -277,6 +288,7 @@ public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl impl
 	/**
 	 * 기관코드수신 총 개수를 조회한다.
 	 */
+	@Override
 	public int selectInsttCodeRecptnListTotCnt(InsttCodeRecptnVO searchVO) throws Exception {
 		return insttCodeRecptnDAO.selectInsttCodeRecptnListTotCnt(searchVO);
 	}
@@ -284,6 +296,7 @@ public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl impl
 	/**
 	 * 기관코드 목록을 조회한다.
 	 */
+	@Override
 	public List<EgovMap> selectInsttCodeList(InsttCodeRecptnVO searchVO) throws Exception {
 		return insttCodeRecptnDAO.selectInsttCodeList(searchVO);
 	}
@@ -291,6 +304,7 @@ public class EgovInsttCodeRecptnServiceImpl extends EgovAbstractServiceImpl impl
 	/**
 	 * 기관코드 총 개수를 조회한다.
 	 */
+	@Override
 	public int selectInsttCodeListTotCnt(InsttCodeRecptnVO searchVO) throws Exception {
 		return insttCodeRecptnDAO.selectInsttCodeListTotCnt(searchVO);
 	}
