@@ -272,4 +272,20 @@ class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 		log.debug("result={}, {}", 1, result);
 	}
 
+	/**
+	 * 등록/수정 merge[공통표준단어]
+	 */
+	@Test
+	void testF10mergeLoginPolicy() {
+		// TODO 이백행 2025-03-19 로그인정책 등록/수정 DAO 단위 테스트
+	}
+
+	/**
+	 * 등록/수정/삭제 multi[공통표준단어]
+	 */
+	@Test
+	void testG10multiLoginPolicy() {
+		// TODO 이백행 2025-03-19 로그인정책 등록/수정/삭제 DAO 단위 테스트
+	}
+
 }
