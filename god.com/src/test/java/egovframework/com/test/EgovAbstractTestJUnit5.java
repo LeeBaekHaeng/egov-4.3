@@ -23,9 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.MethodName.class)
 
-@ContextConfiguration(locations = { "classpath*:egovframework/spring/com/**/context-*.xml"
+@ContextConfiguration(locations = {
 
-		, "file:src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-*.xml"
+		"classpath*:egovframework/spring/com/**/context-*.xml",
+
+		"classpath*:god/spring/com/**/context-*.xml",
+
+		"file:src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-*.xml",
 
 })
 
