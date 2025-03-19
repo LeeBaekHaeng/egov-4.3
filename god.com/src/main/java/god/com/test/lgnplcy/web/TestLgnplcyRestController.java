@@ -1,6 +1,6 @@
 package god.com.test.lgnplcy.web;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import god.com.test.lgnplcy.service.TestLgnplcyService;
@@ -21,7 +21,7 @@ public class TestLgnplcyRestController {
 	 * @param testLgnplcyVO
 	 * @return
 	 */
-	@GetMapping("/api/test/lgnplcy/selectTestLgnplcy.do")
+	@PostMapping("/api/test/lgnplcy/selectTestLgnplcy.do")
 	public TestLgnplcyVO selectTestLgnplcy(TestLgnplcyVO testLgnplcyVO) {
 		log.debug("testLgnplcyVO={}", testLgnplcyVO);
 		return testLgnplcyService.selectTestLgnplcy(testLgnplcyVO);

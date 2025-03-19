@@ -13,8 +13,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
+import org.springframework.web.context.WebApplicationContext;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,6 +57,11 @@ public class EgovAbstractTestJUnit5 {
 	@Autowired
 	private ApplicationContext context;
 
+	@Autowired
+	private WebApplicationContext wac;
+
+	protected MockMvc mockMvc;
+
 	@BeforeAll
 	static void setUpBeforeClass() {
 		log.info("setUpBeforeClass, @BeforeAll");
@@ -82,6 +90,8 @@ public class EgovAbstractTestJUnit5 {
 		for (String beanDefinitionName : beanDefinitionNames) {
 			log.info("beanDefinitionName={}", beanDefinitionName);
 		}
+
+		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 
 	@AfterEach
