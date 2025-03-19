@@ -57,8 +57,8 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * @param loginPolicyVO - 로그인정책 VO
 	 * @return LoginPolicyVO - 로그인정책 VO
 	 */
-	public LoginPolicyVO selectLoginPolicy(LoginPolicyVO loginPolicyVO) throws Exception {
-		return (LoginPolicyVO) selectOne("loginPolicyDAO.selectLoginPolicy", loginPolicyVO);
+	public LoginPolicyVO selectLoginPolicy(LoginPolicyVO loginPolicyVO) {
+		return selectOne("loginPolicyDAO.selectLoginPolicy", loginPolicyVO);
 	}
 
 	/**
