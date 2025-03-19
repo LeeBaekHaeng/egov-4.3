@@ -247,4 +247,29 @@ class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 		log.debug("result={}, {}", 1, result);
 	}
 
+	/**
+	 * 삭제 delete[공통표준단어]
+	 */
+	@Test
+	void testE10deleteLoginPolicy() {
+		LoginPolicy testData = testData();
+
+		// given
+		LoginPolicy loginPolicy = new LoginPolicy();
+		// NOT NULL
+		loginPolicy.setEmplyrId(testData.getEmplyrId());
+
+		log.debug("loginPolicy={}", loginPolicy);
+
+		// when
+		int result = loginPolicyDAO.deleteLoginPolicy(loginPolicy);
+
+		log.debug("result={}", result);
+
+		// then
+		assertEquals(1, result);
+
+		log.debug("result={}, {}", 1, result);
+	}
+
 }

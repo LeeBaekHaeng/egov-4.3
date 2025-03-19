@@ -84,8 +84,8 @@ public class LoginPolicyDAO extends EgovComAbstractDAO {
 	 * 
 	 * @param loginPolicy - 로그인정책 model
 	 */
-	public void deleteLoginPolicy(LoginPolicy loginPolicy) throws Exception {
-		delete("loginPolicyDAO.deleteLoginPolicy", loginPolicy);
+	public int deleteLoginPolicy(LoginPolicy loginPolicy) {
+		return delete("loginPolicyDAO.deleteLoginPolicy", loginPolicy);
 	}
 
 }
