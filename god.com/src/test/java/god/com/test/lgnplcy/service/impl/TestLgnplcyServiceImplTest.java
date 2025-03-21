@@ -2,9 +2,14 @@ package god.com.test.lgnplcy.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
+import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import egovframework.com.cmm.LoginVO;
+import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.com.test.EgovAbstractTestJUnit5;
 import god.com.test.lgnplcy.service.TestLgnplcyService;
 import god.com.test.lgnplcy.service.TestLgnplcyVO;
@@ -103,6 +108,39 @@ class TestLgnplcyServiceImplTest extends EgovAbstractTestJUnit5 {
 	void testB10selectTestLgnplcy() {
 //		LoginPolicy testData = testData();
 
+		// 로그인 사용자 정보 획득 방법
+		// 인증된 사용자객체를 VO형식으로 가져온다.
+		LoginVO loginVO = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
+		if (loginVO != null) {
+			log.debug("loginVO={}", loginVO);
+			log.debug("getUniqId={}", loginVO.getUniqId());
+		}
+
+		// 인증된 사용자의 권한정보를 획득하는 방법
+		// 인증된 사용자의 권한 정보를 가져온다.
+		List<String> authorities = EgovUserDetailsHelper.getAuthorities();
+		for (String authoritie : authorities) {
+			log.debug("authoritie={}", authoritie);
+		}
+
+		if (authorities.contains("ROLE_ANONYMOUS")) {
+			// 익명 사용자
+			log.debug("익명 사용자");
+		} else if (authorities.contains("ROLE_USER")) {
+			// 일반 사용자
+			log.debug("일반 사용자");
+		} else if (authorities.contains("ROLE_ADMIN")) {
+			// 관리자
+			log.debug("관리자");
+		} else {
+			log.debug("권한정보");
+		}
+
+		// 인증여부 확인방법
+		// 인증된 사용자 여부를 체크한다.
+		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+		log.debug("isAuthenticated={}", isAuthenticated);
+
 		// given
 		TestLgnplcyVO testLgnplcyVO = new TestLgnplcyVO(); // 로그인정책
 		testLgnplcyVO.setEmplyrId("TEST1"); // 업무사용자ID
@@ -112,8 +150,13 @@ class TestLgnplcyServiceImplTest extends EgovAbstractTestJUnit5 {
 		// when
 		TestLgnplcyVO result = testLgnplcyService.selectTestLgnplcy(testLgnplcyVO);
 
+		if (result == null) {
+			throw new BaseRuntimeException();
+		}
+
 		log.debug("result={}", result);
 		log.debug("emplyrId={}", result.getEmplyrId());
+
 //		log.debug("emplyrNm={}", result.getEmplyrNm());
 //		log.debug("emplyrSe={}", result.getEmplyrSe());
 //		log.debug("ipInfo={}", result.getIpInfo());

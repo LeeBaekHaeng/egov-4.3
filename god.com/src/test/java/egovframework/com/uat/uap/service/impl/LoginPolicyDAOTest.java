@@ -16,6 +16,7 @@ import egovframework.com.uat.uap.service.LoginPolicyVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+//@Commit
 class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 
 	@Autowired
