@@ -39,7 +39,8 @@ class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 //		loginPolicy.setEmplyrId("ENTERPRISE"); // 업무사용자ID
 //		loginPolicy.setEmplyrId("webmaster"); // 업무사용자ID
 
-		loginPolicy.setIpInfo("127.0.0.1"); // IP정보
+//		loginPolicy.setIpInfo("127.0.0.1"); // IP정보
+		loginPolicy.setIpInfo(""); // IP정보
 		loginPolicy.setDplctPermAt("Y"); // 중복허용여부
 		loginPolicy.setLmttAt("Y"); // 제한여부
 		// NULL
@@ -74,7 +75,8 @@ class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 //		loginPolicy.setEmplyrId("ENTERPRISE"); // 업무사용자ID
 //		loginPolicy.setEmplyrId("webmaster"); // 업무사용자ID
 
-		loginPolicy.setIpInfo("127.0.0.1"); // IP정보
+//		loginPolicy.setIpInfo("127.0.0.1"); // IP정보
+		loginPolicy.setIpInfo(""); // IP정보
 		loginPolicy.setDplctPermAt("Y"); // 중복허용여부
 		loginPolicy.setLmttAt("Y"); // 제한여부
 		// NULL
@@ -220,7 +222,8 @@ class LoginPolicyDAOTest extends EgovAbstractTestJUnit5 {
 		LoginPolicy loginPolicy = new LoginPolicy();
 		// NOT NULL
 		loginPolicy.setEmplyrId(testData.getEmplyrId());
-		loginPolicy.setIpInfo("127.0.0.2");
+//		loginPolicy.setIpInfo("127.0.0.2");
+		loginPolicy.setIpInfo("");
 		loginPolicy.setDplctPermAt("N");
 		loginPolicy.setLmttAt("N");
 		// NULL
