@@ -1,6 +1,7 @@
-#Wed Mar 19 17:37:18 KST 2025
+#Fri Mar 21 10:46:34 KST 2025
 \!/=
 /configuration/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true
+/configuration/org.eclipse.core.net/systemProxiesEnabled=true
 /configuration/org.eclipse.epp.mpc.ui/showOpenFavoritesNotification=false
 /configuration/org.eclipse.ui.ide/MAX_RECENT_WORKSPACES=10
 /configuration/org.eclipse.ui.ide/RECENT_WORKSPACES=C\:\\EGOVFRAMEDEV-4.3.0-64BIT\\eGovFrameDev-4.3.0-64bit\\workspace-egov\nC\:\\eGovFrameDev-4.3.0-64bit\\workspace-egov
@@ -12,9 +13,9 @@
 /instance/Docker/runTargets-v2=
 /instance/net.harawata.mybatipse/prefCustomTypeAliases=\t
 /instance/net.sourceforge.pmd.eclipse.plugin/net.sourceforge.pmd.eclipse.plugin.active_renderers=,text
-/instance/net.sourceforge.pmd.eclipse.plugin/net.sourceforge.pmd.eclipse.plugin.active_rules=
+/instance/net.sourceforge.pmd.eclipse.plugin/net.sourceforge.pmd.eclipse.plugin.active_rules=,UselessStringValueOf,FinalFieldCouldBeStatic,StringToString,UncommentedEmptyMethodBody,AvoidSynchronizedAtMethodLevel,UnnecessarySemicolon,AvoidUsingHardCodedIP,AvoidThrowingRawExceptionTypes,AvoidThrowingNullPointerException,SwitchStmtsShouldHaveDefault,UnusedFormalParameter,UselessParentheses,AssignmentInOperand,ImmutableField,AvoidArrayLoops,MisplacedNullCheck,StringInstantiation,HardCodedCryptoKey,EmptyCatchBlock,UnnecessaryBoxing,UnnecessaryImport,SimplifyBooleanExpressions,LocalVariableNamingConventions,UnusedPrivateMethod,FormalParameterNamingConventions,InefficientEmptyStringCheck,EmptyControlStatement,UnnecessaryConversionTemporary,UnusedPrivateField,SystemPrintln,EqualsNull,AvoidCatchingGenericException,AvoidReassigningParameters,CloseResource,SimpleDateFormatNeedsLocale,BrokenNullCheck,InefficientStringBuffering,AssignmentToNonFinalStatic,FieldNamingConventions,ArrayIsStoredDirectly,AvoidPrintStackTrace,ConstantsInInterface,AbstractClassWithoutAbstractMethod,MethodReturnsInternalArray
+/instance/net.sourceforge.pmd.eclipse.plugin/net.sourceforge.pmd.eclipse.plugin.globalRuleManagement=true
 /instance/net.sourceforge.pmd.eclipse.plugin/net.sourceforge.pmd.eclipse.plugin.ruletable.hiddenColumns=,tExtURL,tXmpCnt,tMaxLang,tSince,fixCnt,tMinLang,modCnt
-/instance/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true
 /instance/org.eclipse.core.resources/encoding=UTF-8
 /instance/org.eclipse.core.resources/version=1
 /instance/org.eclipse.debug.core/prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions/>\r\n
@@ -23,8 +24,9 @@
 /instance/org.eclipse.debug.ui/org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<launchPerspectives/>\r\n
 /instance/org.eclipse.debug.ui/org.eclipse.debug.ui.switch_perspective_on_suspend=always
 /instance/org.eclipse.debug.ui/org.eclipse.debug.ui.user_view_bindings=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<viewBindings>\r\n    <view id\="org.eclipse.jdt.debug.ui.DisplayView">\r\n        <perspective id\="org.eclipse.debug.ui.DebugPerspective" userAction\="opened"/>\r\n    </view>\r\n    <view id\="org.eclipse.debug.ui.ExpressionView">\r\n        <perspective id\="org.eclipse.debug.ui.DebugPerspective" userAction\="opened"/>\r\n    </view>\r\n</viewBindings>\r\n
+/instance/org.eclipse.debug.ui/pref_state_memento.org.eclipse.debug.ui.BreakpointView=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<VariablesViewMemento org.eclipse.debug.ui.SASH_DETAILS_PART\="315" org.eclipse.debug.ui.SASH_VIEW_PART\="684">\r\n<PRESENTATION_CONTEXT_PROPERTIES IMemento.internal.id\="org.eclipse.debug.ui.BreakpointView">\r\n<BOOLEAN BOOLEAN\="true" IMemento.internal.id\="org.eclipse.debug.ui.check"/>\r\n</PRESENTATION_CONTEXT_PROPERTIES>\r\n</VariablesViewMemento>
 /instance/org.eclipse.debug.ui/pref_state_memento.org.eclipse.debug.ui.VariableView=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<VariablesViewMemento org.eclipse.debug.ui.SASH_DETAILS_PART\="315" org.eclipse.debug.ui.SASH_VIEW_PART\="684">\r\n<PRESENTATION_CONTEXT_PROPERTIES IMemento.internal.id\="org.eclipse.debug.ui.VariableView">\r\n<BOOLEAN BOOLEAN\="true" IMemento.internal.id\="PRESENTATION_SHOW_LOGICAL_STRUCTURES"/>\r\n</PRESENTATION_CONTEXT_PROPERTIES>\r\n</VariablesViewMemento>
-/instance/org.eclipse.debug.ui/preferredDetailPanes=DefaultDetailPane,org.eclipse.jdt.debug.ui.JAVA_VARIABLE_DETAIL_PANE_VARIABLES\:org.eclipse.jdt.debug.ui.JAVA_VARIABLE_DETAIL_PANE_VARIABLES|DefaultDetailPane\:DefaultDetailPane|
+/instance/org.eclipse.debug.ui/preferredDetailPanes=DefaultDetailPane,org.eclipse.jdt.debug.ui.JAVA_VARIABLE_DETAIL_PANE_VARIABLES\:org.eclipse.jdt.debug.ui.JAVA_VARIABLE_DETAIL_PANE_VARIABLES|org.eclipse.jdt.debug.ui.DETAIL_PANE_LINE_BREAKPOINT\:org.eclipse.jdt.debug.ui.DETAIL_PANE_LINE_BREAKPOINT|DefaultDetailPane\:DefaultDetailPane|
 /instance/org.eclipse.debug.ui/preferredTargets=default,org.eclipse.lsp4e.debug.toggleBreakpointTarget\:default|org.eclipse.lsp4e.debug.toggleBreakpointTarget\:org.eclipse.lsp4e.debug.toggleBreakpointTarget|
 /instance/org.eclipse.egit.core/GitRepositoriesView.GitDirectories=C\:\\EGOVFRAMEDEV-4.3.0-64BIT\\eGovFrameDev-4.3.0-64bit\\workspace-egov\\git\\egov-4.3\\.git;
 /instance/org.eclipse.egit.core/GitRepositoriesView.GitDirectories.relative=git\\egov-4.3\\.git;
@@ -286,6 +288,7 @@
 /instance/org.eclipse.wst.ws.service.policy/org.eclipse.wst.ws.service.policy.ui.servicepols.wsiprofilecomp.wsiap.defaultProtocol=http\://schemas.xmlsoap.org/wsdl/soap/
 /instance/org.eclipse.wst.ws.service.policy/org.eclipse.wst.ws.service.policy.ui.servicepols.wsiprofilecomp.wsissbp.defaultProtocol=http\://schemas.xmlsoap.org/wsdl/soap/
 /instance/org.eclipse.wst.xml.ui/org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart.lastActivePage=1
+/instance/org.eclipse.wst.xsd.ui/org.eclipse.wst.xsd.ui.internal.defaultPage=org.eclipse.wst.xsd.ui.internal.sourcePage
 /instance/org.springframework.ide.eclipse.boot.dash/toggle-filters\:enableRegexFilter=false
 /instance/org.springframework.ide.eclipse.boot.dash\:Docker/runTargets-v2=
 /instance/org.springframework.ide.eclipse.boot.launch/cglib.breakpoint.warning.disabled=true
@@ -293,7 +296,6 @@
 /instance/org.springsource.ide.eclipse.commons.ui/egit.pref.fixed.core_autoIgnoreDerivedResources=true
 @net.harawata.mybatipse=1.3.0.202210300418
 @net.sourceforge.pmd.eclipse.plugin=7.4.0.v20240726-0845-r
-@org.eclipse.core.net=1.5.300.v20231214-1526
 @org.eclipse.core.resources=3.20.100.v20240209-1706
 @org.eclipse.debug.core=3.21.300.v20240109-1022
 @org.eclipse.debug.ui=3.18.300.v20240213-1843
@@ -328,6 +330,7 @@
 @org.eclipse.wst.validation=1.3.0.v202308161955
 @org.eclipse.wst.ws.service.policy=1.1.0.v202308010229
 @org.eclipse.wst.xml.ui=1.2.701.v202308160453
+@org.eclipse.wst.xsd.ui=1.3.601.v202308160453
 @org.springframework.ide.eclipse.boot.dash=4.22.1.202405011620
 @org.springframework.ide.eclipse.boot.launch=4.22.1.202405011620
 @org.springframework.ide.eclipse.imports=4.22.1.202405011620
