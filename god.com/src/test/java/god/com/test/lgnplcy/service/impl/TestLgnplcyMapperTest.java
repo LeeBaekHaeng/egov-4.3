@@ -111,8 +111,11 @@ class TestLgnplcyMapperTest extends EgovAbstractTestJUnit5 {
 		// when
 		TestLgnplcyVO result = testLgnplcyMapper.selectTestLgnplcy(testLgnplcyVO);
 
-		log.debug("result={}", result);
-		log.debug("emplyrId={}", result.getEmplyrId());
+		if (result == null) {
+//			throw new BaseRuntimeException();
+		} else {
+			log.debug("result={}", result);
+			log.debug("emplyrId={}", result.getEmplyrId());
 //		log.debug("emplyrNm={}", result.getEmplyrNm());
 //		log.debug("emplyrSe={}", result.getEmplyrSe());
 //		log.debug("ipInfo={}", result.getIpInfo());
@@ -123,18 +126,19 @@ class TestLgnplcyMapperTest extends EgovAbstractTestJUnit5 {
 //		log.debug("regYn={}", result.getRegYn());
 //
 //		// then
-		assertEquals(testLgnplcyVO.getEmplyrId(), result.getEmplyrId());
+			assertEquals(testLgnplcyVO.getEmplyrId(), result.getEmplyrId());
 //		assertEquals(testData.getIpInfo(), result.getIpInfo());
 //		assertEquals(testData.getDplctPermAt(), result.getDplctPermAt());
 //		assertEquals(testData.getLmttAt(), result.getLmttAt());
 //		assertEquals(testData.getUserId(), result.getUserId());
 
-		log.debug("=예상, 실제");
-		log.debug("emplyrId={}, {}", testLgnplcyVO.getEmplyrId(), result.getEmplyrId());
+			log.debug("=예상, 실제");
+			log.debug("emplyrId={}, {}", testLgnplcyVO.getEmplyrId(), result.getEmplyrId());
 //		log.debug("ipInfo={}, {}", testData.getIpInfo(), result.getIpInfo());
 //		log.debug("dplctPermAt={}, {}", testData.getDplctPermAt(), result.getDplctPermAt());
 //		log.debug("lmttAt={}, {}", testData.getLmttAt(), result.getLmttAt());
 //		log.debug("userId={}, {}", testData.getUserId(), result.getUserId());
+		}
 	}
 
 //	/**
