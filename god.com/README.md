@@ -1,5 +1,108 @@
 # 개발표준가이드
 
+## COMTNLOGINPOLICY 로그인정책 테이블 프로그램 개발
+
+공공데이터 공통표준7차 제·개정(2024.11월).xlsx
+- 공통표준단어
+- 로그인정책
+- 로그인
+- 정책
+
+```
+571	1차(2020-08)	로그인	LGN	Login	Login. 다중 사용자 시스템을 사용하기 위하여 컴퓨터에 사용자임을 알리는 일	N	-	-	-
+1730	6차(2023-11)	정책	PLCY	Policy	政策. 정치적 목적을 실현하기 위한 방책	N	-	-	-
+```
+
+LGN_PLCY
+
+개발 sql
+
+```
+C:\EGOVFRAMEDEV-4.3.0-64BIT\eGovFrameDev-4.3.0-64bit\workspace-egov\git\egov-4.3\god.com\src\script3\dml\mysql\com
+```
+
+COMTNLOGINPOLICY 로그인정책 폴더 새로 만들기
+
+```
+COMTNLOGINPOLICY 로그인정책.sql
+```
+
+COMTNLOGINPOLICY 로그인정책 SELECT
+
+```sql
+SELECT * FROM COMTNLOGINPOLICY
+;
+```
+
+comtnloginpolicy DBeaver SQL 생성
+
+```
+comtnloginpolicy
+```
+
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+- MERGE
+
+service.impl 패키지
+
+```
+god.com.test2.lgnplcy.service.impl
+```
+
+web 패키지
+
+```
+god.com.test2.lgnplcy.web
+```
+
+package-info.java
+
+```java
+/**
+ * 로그인정책
+ */
+package god.com.test2.lgnplcy;
+
+// 571	1차(2020-08)	로그인	LGN	Login	Login. 다중 사용자 시스템을 사용하기 위하여 컴퓨터에 사용자임을 알리는 일	N	-	-	-
+// 1730	6차(2023-11)	정책	PLCY	Policy	政策. 정치적 목적을 실현하기 위한 방책	N	-	-	-
+
+// LGN_PLCY
+// lgn_plcy
+
+// LGNPLCY
+// lgnplcy
+
+// Test2LgnPlcyDefaultVO
+// test2lgnPlcyDefaultVO
+
+// Test2LgnPlcyVO
+// test2LgnPlcyVO
+
+// /god.com/src/main/resources/god/mapper/com/test2/lgnplcy/Test2LgnPlcy_SQL_mysql.xml
+// <mapper namespace="god.com.test2.lgnplcy.service.impl.Test2LgnPlcyMapper">
+// <insert id="insertTest2LgnPlcy" parameterType="god.com.test2.lgnplcy.service.Test2LgnPlcyVO">
+// <![CDATA[
+// INSERT INTO /* Test2LgnPlcyMapper.insertTest2LgnPlcy */ COMTNLOGINPOLICY
+(EMPLYR_ID, IP_INFO, DPLCT_PERM_AT, LMTT_AT, FRST_REGISTER_ID, FRST_REGIST_PNTTM, LAST_UPDUSR_ID, LAST_UPDT_PNTTM)
+VALUES('', '', '', '', NULL, NULL, NULL, NULL)
+// ]]>
+
+// Test2LgnPlcyMapper
+// test2LgnPlcyMapper
+
+// Test2LgnPlcyServiceImpl
+// test2LgnPlcyServiceImpl
+
+// Test2LgnPlcyService
+// test2LgnPlcyService
+
+// Test2LgnPlcyRestController
+// test2LgnPlcyRestController
+```
+
 ## 소스 포매터(Code Formatter)
 
 기 배포된 표준화된 소스 포매터(Code Formatter)를 Eclipse에 임포트하여 활용(ctrl+shift+F)하도록 한다.
