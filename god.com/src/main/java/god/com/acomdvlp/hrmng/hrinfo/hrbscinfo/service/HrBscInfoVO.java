@@ -19,4 +19,18 @@ public class HrBscInfoVO extends HrBscInfoDefaultVO {
 	 */
 	private String emplyrId;
 
+	private String ipInfo;
+
+	private String dplctAt;
+
+	private String lmttAt;
+
+	private String frstId;
+
+	private String frstPnttm;
+
+	private String lastId;
+
+	private String lastPnttm;
+
 }

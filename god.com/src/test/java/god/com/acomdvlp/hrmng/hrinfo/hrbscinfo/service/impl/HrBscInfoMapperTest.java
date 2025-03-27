@@ -41,6 +41,11 @@ class HrBscInfoMapperTest extends EgovAbstractTestJUnit5 {
 		// given
 		HrBscInfoVO hrBscInfoVO = new HrBscInfoVO(); // 로그인정책
 //		hrBscInfoVO.setEmplyrId("TEST1"); // 업무사용자ID
+		try {
+			hrBscInfoVO.setEmplyrId(hrBscInfoIdGnrService.getNextStringId());
+		} catch (FdlException e) {
+			throw new BaseRuntimeException("FdlException hrBscInfoIdGnrService", e);
+		} // 업무사용자ID
 
 //		String now = LocalDateTime.now().toString();
 		// 현재 시간 (밀리초 포함)
@@ -51,7 +56,7 @@ class HrBscInfoMapperTest extends EgovAbstractTestJUnit5 {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 		// 포맷 적용
 		String now = ldt.format(formatter);
-		hrBscInfoVO.setEmplyrId("AA_" + now); // 업무사용자ID
+//		hrBscInfoVO.setEmplyrId("AA_" + now); // 업무사용자ID
 
 		String hrBscInfoId;
 		try {

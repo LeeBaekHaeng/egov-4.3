@@ -5,15 +5,23 @@ SELECT EMPLYR_ID, IP_INFO, DPLCT_PERM_AT, LMTT_AT, FRST_REGISTER_ID, FRST_REGIST
 FROM COMTNLOGINPOLICY;
 
 SELECT /* Maper.select */
-       T1.EMPLYR_ID /* 업무사용자ID */
-     , IP_INFO
-     , DPLCT_PERM_AT
-     , LMTT_AT
-     , FRST_REGISTER_ID
-     , FRST_REGIST_PNTTM
-     , LAST_UPDUSR_ID
-     , LAST_UPDT_PNTTM
-  FROM COMTNLOGINPOLICY T1 /* 로그인정책 */
+--        T1.EMPLYR_ID /* 업무사용자ID */
+--      , IP_INFO
+--      , DPLCT_PERM_AT
+--      , LMTT_AT
+--      , FRST_REGISTER_ID
+--      , FRST_REGIST_PNTTM
+--      , LAST_UPDUSR_ID
+--      , LAST_UPDT_PNTTM
+       A.EMPLYR_ID /* 업무사용자ID */
+     , A.IP_INFO /* IP정보 */
+     , A.DPLCT_PERM_AT /* 중복허용여부 */
+     , A.LMTT_AT /* 제한여부 */
+     , A.FRST_REGISTER_ID /* 최초등록자ID */
+     , A.FRST_REGIST_PNTTM /* 최초등록시점 */
+     , A.LAST_UPDUSR_ID /* 최종수정자ID */
+     , A.LAST_UPDT_PNTTM /* 최종수정시점 */
+  FROM COMTNLOGINPOLICY A /* 로그인정책 */
 ;
 
 INSERT INTO COMTNLOGINPOLICY
