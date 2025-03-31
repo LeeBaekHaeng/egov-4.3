@@ -9,4 +9,6 @@ public interface HrBscInfoMapper {
 
 	int insertHrBscInfo(HrBscInfoVO hrBscInfoVO);
 
+	String selectHrBscInfoId();
+
 }

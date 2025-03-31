@@ -1,5 +1,7 @@
 package god.com.acomdvlp.hrmng.hrinfo.hrbscinfo.service;
 
+import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +29,8 @@ public class HrBscInfoVO extends HrBscInfoDefaultVO {
 
 	private String frstId;
 
-	private String frstPnttm;
+//	private String frstPnttm;
+	private LocalDateTime frstPnttm;
 
 	private String lastId;
 

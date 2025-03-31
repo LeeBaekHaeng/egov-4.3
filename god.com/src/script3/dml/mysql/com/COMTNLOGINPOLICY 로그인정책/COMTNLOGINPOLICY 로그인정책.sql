@@ -68,7 +68,7 @@ SELECT /* Mapper.select */
 SELECT
        CONCAT('     , A.', A.COLUMN_NAME, ' /* ', A.COLUMN_COMMENT, ' */') AS SQL1
      , CONCAT('private String ', A.CAMEL_CASE_COLUMN, ';') AS VO
-     , CONCAT('#{', A.CAMEL_CASE_COLUMN, '}', ' /* ', A.COLUMN_COMMENT, ' */') AS Mapper
+     , CONCAT(', #{', A.CAMEL_CASE_COLUMN, '}', ' /* ', A.COLUMN_COMMENT, ' */') AS Mapper
      , A.CAMEL_CASE_COLUMN
      , A.COLUMN_NAME
      , A.IS_NULLABLE
