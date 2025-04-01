@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import god.com.acomdvlp.hrmng.hrinfo.hrbscinfo.service.HrBscInfoService;
+import god.com.acomdvlp.hrmng.hrinfo.hrbscinfo.service.HrBscInfoUpdt2VO;
 import god.com.acomdvlp.hrmng.hrinfo.hrbscinfo.service.HrBscInfoVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,22 @@ public class HrBscInfoRestController {
 		hrBscInfoVO.setResult(result);
 
 		return hrBscInfoVO;
+	}
+
+	@PostMapping("/api/acomdvlp/hrmng/hrinfo/hrbscinfo/update2HrBscInfo.do")
+	public HrBscInfoVO updateHr2BscInfo(HrBscInfoUpdt2VO hrBscInfoUpdt2VO, BindingResult bindingResult) {
+		if (log.isDebugEnabled()) {
+			log.debug("hrBscInfoUpdt2VO={}", hrBscInfoUpdt2VO);
+		}
+
+		beanValidator.validate(hrBscInfoUpdt2VO, bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			hrBscInfoUpdt2VO.setAllErrors(bindingResult.getAllErrors());
+			return hrBscInfoUpdt2VO;
+		}
+
+		return hrBscInfoUpdt2VO;
 	}
 
 }
