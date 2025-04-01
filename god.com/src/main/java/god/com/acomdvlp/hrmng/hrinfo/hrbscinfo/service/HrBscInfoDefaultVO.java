@@ -19,6 +19,7 @@ public class HrBscInfoDefaultVO extends ComDefaultVO {
 
 	private int result;
 
+//	@JsonIgnore
 	private List<ObjectError> allErrors;
 
 }

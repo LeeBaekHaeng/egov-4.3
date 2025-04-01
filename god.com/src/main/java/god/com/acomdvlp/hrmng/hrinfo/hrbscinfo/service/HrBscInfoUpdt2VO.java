@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+//@AllArgsConstructor
 public class HrBscInfoUpdt2VO extends HrBscInfoVO {
 
 	/**
