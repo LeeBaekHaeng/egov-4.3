@@ -15,7 +15,9 @@ class HrBscInfoRestControllerTest extends EgovAbstractTestJUnit5 {
 
 	@Test
 	void testA10insertHrBscInfo() {
-		String ipInfo = "127.0.0.1";
+//		String ipInfo = "127.0.0.1";
+//		String ipInfo = null;
+		String ipInfo = "123456789012345678901234";
 		String dplctAt = "Y";
 		String lmttAt = "Y";
 

@@ -1,7 +1,9 @@
 package god.com.acomdvlp.hrmng.hrinfo.hrbscinfo.web;
 
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import god.com.acomdvlp.hrmng.hrinfo.hrbscinfo.service.HrBscInfoService;
 import god.com.acomdvlp.hrmng.hrinfo.hrbscinfo.service.HrBscInfoVO;
@@ -15,10 +17,19 @@ public class HrBscInfoRestController {
 
 	private final HrBscInfoService hrBscInfoService;
 
+	private final DefaultBeanValidator beanValidator;
+
 	@PostMapping("/api/acomdvlp/hrmng/hrinfo/hrbscinfo/insertHrBscInfo.do")
-	public HrBscInfoVO insertHrBscInfo(HrBscInfoVO hrBscInfoVO) {
+	public HrBscInfoVO insertHrBscInfo(HrBscInfoVO hrBscInfoVO, BindingResult bindingResult) {
 		if (log.isDebugEnabled()) {
 			log.debug("hrBscInfoVO={}", hrBscInfoVO);
+		}
+
+		beanValidator.validate(hrBscInfoVO, bindingResult); // validation 수행
+
+		if (bindingResult.hasErrors()) {
+			hrBscInfoVO.setAllErrors(bindingResult.getAllErrors());
+			return hrBscInfoVO;
 		}
 
 		hrBscInfoVO.setEmplyrId(hrBscInfoService.getNextStringId());
