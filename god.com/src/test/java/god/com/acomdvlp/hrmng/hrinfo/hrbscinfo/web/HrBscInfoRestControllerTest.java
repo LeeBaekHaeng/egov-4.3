@@ -2,6 +2,7 @@ package god.com.acomdvlp.hrmng.hrinfo.hrbscinfo.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Assertions;
@@ -15,9 +16,9 @@ class HrBscInfoRestControllerTest extends EgovAbstractTestJUnit5 {
 
 	@Test
 	void testA10insertHrBscInfo() {
-//		String ipInfo = "127.0.0.1";
+		String ipInfo = "127.0.0.1";
 //		String ipInfo = null;
-		String ipInfo = "123456789012345678901234";
+//		String ipInfo = "123456789012345678901234";
 		String dplctAt = "Y";
 		String lmttAt = "Y";
 
@@ -35,7 +36,7 @@ class HrBscInfoRestControllerTest extends EgovAbstractTestJUnit5 {
 
 				.andExpect(status().isOk())
 
-//				.andExpect(jsonPath("$.ipInfo").value(ipInfo))
+				.andExpect(jsonPath("$.ipInfo").value(ipInfo))
 
 				.andDo(print())
 
