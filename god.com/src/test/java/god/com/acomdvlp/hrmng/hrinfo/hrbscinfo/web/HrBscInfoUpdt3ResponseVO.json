@@ -14,10 +14,10 @@
 	"allErrors": [
 		{
 			"codes": [
-				"errors.maxlength.hrBscInfoVO.ipInfo",
-				"errors.maxlength.ipInfo",
-				"errors.maxlength.java.lang.String",
-				"errors.maxlength"
+				"errors.required.hrBscInfoUpdt3VO.ipInfo",
+				"errors.required.ipInfo",
+				"errors.required.java.lang.String",
+				"errors.required"
 			],
 			"arguments": [
 				{
@@ -37,16 +37,16 @@
 					"code": "23"
 				}
 			],
-			"defaultMessage": "errors.maxlength",
-			"objectName": "hrBscInfoVO",
+			"defaultMessage": "errors.required",
+			"objectName": "hrBscInfoUpdt3VO",
 			"field": "ipInfo",
-			"rejectedValue": "123456789012345678901234",
+			"rejectedValue": null,
 			"bindingFailure": false,
-			"code": "errors.maxlength"
+			"code": "errors.required"
 		}
 	],
 	"emplyrId": null,
-	"ipInfo": "123456789012345678901234",
+	"ipInfo": null,
 	"dplctAt": "Y",
 	"lmttAt": "Y",
 	"frstId": null,

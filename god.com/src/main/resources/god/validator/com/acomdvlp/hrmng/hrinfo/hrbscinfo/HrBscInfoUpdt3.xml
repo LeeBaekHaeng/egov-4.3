@@ -6,10 +6,7 @@
 <form-validation>
 	<formset>
 
-		<form name="hrBscInfoUpdt2VO">
-
-			<!-- <field property="ipInfo" depends="required"> <arg0 key="cop.bbsNm" 
-				/> </field> -->
+		<form name="hrBscInfoUpdt3VO">
 
 			<field property="ipInfo" depends="required, maxlength">
 				<arg0 key="cop.tmplatNm" />

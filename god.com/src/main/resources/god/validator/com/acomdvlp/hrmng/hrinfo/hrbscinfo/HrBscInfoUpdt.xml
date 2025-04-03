@@ -6,7 +6,7 @@
 <form-validation>
 	<formset>
 
-		<form name="hrBscInfoUpdt2VO">
+		<form name="hrBscInfoUpdtVO">
 
 			<!-- <field property="ipInfo" depends="required"> <arg0 key="cop.bbsNm" 
 				/> </field> -->

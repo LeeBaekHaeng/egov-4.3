@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import egovframework.com.cmm.web.EgovFileMngController;
 import egovframework.com.test.EgovAbstractTestJUnit5;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,7 +45,75 @@ class HrBscInfoRestControllerTest extends EgovAbstractTestJUnit5 {
 
 				.andExpect(status().isOk())
 
-				.andExpect(jsonPath("$.ipInfo").value(ipInfo))
+//				.andExpect(jsonPath("$.ipInfo").value(ipInfo))
+
+				.andExpect(jsonPath("$.result").value(1))
+
+				.andDo(print())
+
+		);
+	}
+
+	@Test
+	void testD10update3HrBscInfo() {
+		String ipInfo = "127.0.0.1";
+//		String ipInfo = null;
+//		String ipInfo = "123456789012345678901234";
+		String dplctAt = "Y";
+		String lmttAt = "Y";
+
+		Assertions.assertDoesNotThrow(() ->
+
+		mockMvc.perform(post("/api/acomdvlp/hrmng/hrinfo/hrbscinfo/update3HrBscInfo.do")
+
+				.param("ipInfo", ipInfo)
+
+				.param("dplctAt", dplctAt)
+
+				.param("lmttAt", lmttAt)
+
+		)
+
+				.andExpect(status().isOk())
+
+//				.andExpect(jsonPath("$.ipInfo").value(ipInfo))
+
+				.andExpect(jsonPath("$.result").value(1))
+
+				.andDo(print())
+
+		);
+	}
+
+	@Test
+	void testD10updateHrBscInfo() {
+		String ipInfo = "127.0.0.1";
+//		String ipInfo = null;
+//		String ipInfo = "123456789012345678901234";
+
+		String dplctAt = "Y";
+//		String dplctAt = null;
+//		String dplctAt = "";
+
+		String lmttAt = "Y";
+
+		Assertions.assertDoesNotThrow(() ->
+
+		mockMvc.perform(post("/api/acomdvlp/hrmng/hrinfo/hrbscinfo/updateHrBscInfo.do")
+
+				.param("ipInfo", ipInfo)
+
+				.param("dplctAt", dplctAt)
+
+				.param("lmttAt", lmttAt)
+
+		)
+
+				.andExpect(status().isOk())
+
+//				.andExpect(jsonPath("$.ipInfo").value(ipInfo))
+//
+				.andExpect(jsonPath("$.result").value(1))
 
 				.andDo(print())
 
@@ -53,6 +122,13 @@ class HrBscInfoRestControllerTest extends EgovAbstractTestJUnit5 {
 
 	@Test
 	void testD10update2HrBscInfo() {
+		String emplyrIdEncpt = EgovFileMngController.encrypt("AAAA_000000000002015");
+		String emplyrIdDecrypt = EgovFileMngController.decrypt(emplyrIdEncpt);
+		if (log.isDebugEnabled()) {
+			log.debug("emplyrIdEncpt 업무사용자ID 암호화={}", emplyrIdEncpt);
+			log.debug("emplyrIdDecrypt 업무사용자ID 복호화={}", emplyrIdDecrypt);
+		}
+
 //		String ipInfo = "127.0.0.1";
 		String ipInfo = null;
 //		String ipInfo = "123456789012345678901234";
