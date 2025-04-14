@@ -99,17 +99,18 @@ class Test2LgnPlcyMapperTest extends EgovAbstractTestJUnit5 {
 	 * 조회(단건) select[공통표준단어]
 	 */
 	@Test
+//	@Commit
 	void testB10selectTestLgnplcy() {
 //		LoginPolicy testData = testData();
 
 		// given
 		TestLgnplcyVO testLgnplcyVO = new TestLgnplcyVO(); // 로그인정책
-		testLgnplcyVO.setEmplyrId("TEST1"); // 업무사용자ID
+		testLgnplcyVO.setEmplyrId("TEST1-"); // 업무사용자ID
 
 		log.debug("testLgnplcyVO={}", testLgnplcyVO);
 
 		// when
-		int result = test2LgnPlcyMapper.insertTest2LgnPlcy();
+		int result = test2LgnPlcyMapper.insertTest2LgnPlcy(testLgnplcyVO);
 
 		if (log.isDebugEnabled()) {
 			log.debug("result={}", result);

@@ -2,6 +2,7 @@ package god.com.test.lgnplcy.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Assertions;
@@ -109,7 +110,7 @@ class TestLgnplcyRestControllerTest extends EgovAbstractTestJUnit5 {
 
 				.andExpect(status().isOk())
 
-//				.andExpect(jsonPath("$.emplyrId").value(emplyrId))
+				.andExpect(jsonPath("$.emplyrId").value(emplyrId))
 
 				.andDo(print())
 

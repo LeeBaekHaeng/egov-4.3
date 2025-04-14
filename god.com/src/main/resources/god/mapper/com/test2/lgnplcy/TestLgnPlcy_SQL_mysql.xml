@@ -5,11 +5,12 @@
 <mapper
 	namespace="god.com.test2.lgnplcy.service.impl.Test2LgnPlcyMapper">
 
-	<insert id="insertTest2LgnPlcy">
+	<insert id="insertTest2LgnPlcy"
+		parameterType="god.com.test.lgnplcy.service.TestLgnplcyVO">
 <![CDATA[
 INSERT INTO /* Test2LgnPlcyMapper.insertTest2LgnPlcy */ COMTNLOGINPOLICY
 (EMPLYR_ID, IP_INFO, DPLCT_PERM_AT, LMTT_AT, FRST_REGISTER_ID, FRST_REGIST_PNTTM, LAST_UPDUSR_ID, LAST_UPDT_PNTTM)
-VALUES('', '', '', '', NULL, NULL, NULL, NULL)
+VALUES(#{emplyrId}, '', '', '', NULL, NULL, NULL, NULL)
 ]]>
 	</insert>
 
