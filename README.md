@@ -1,6 +1,32 @@
 # egov-4.3
 전자정부 표준프레임워크 4.3
 
+목차
+- [전자정부 표준프레임워크 4.3 개발환경 새 폴더](#전자정부-표준프레임워크-43-개발환경-새-폴더)
+- [전자정부 표준프레임워크 4.3 개발환경 다운로드](#전자정부-표준프레임워크-43-개발환경-다운로드)
+- [전자정부 표준프레임워크 4.3 개발환경 반디집으로 압축 풀기(B)...](#전자정부-표준프레임워크-43-개발환경-반디집으로-압축-풀기b)
+- [아파치 메이븐 localRepository 설정](#아파치-메이븐-localrepository-설정)
+- [이클립스 바로 가기](#이클립스-바로-가기)
+- [이클립스 아파치 메이븐 설정](#이클립스-아파치-메이븐-설정)
+- [이클립스 아파치 메이븐 설정](#이클립스-아파치-메이븐-설정-1)
+- [공통컴포넌트 4.3.0 all-in-one 프로젝트 생성](#공통컴포넌트-430-all-in-one-프로젝트-생성)
+- [dependency:go-offline](#dependencygo-offline)
+- [MariaDB Server 11.4.5 다운로드](#mariadb-server-1145-다운로드)
+- [MariaDB Server 11.4.5 설치](#mariadb-server-1145-설치)
+- [MariaDB Server 11.4.5 설정](#mariadb-server-1145-설정)
+- [MariaDB Server 11.4.5 실행](#mariadb-server-1145-실행)
+- [DBeaver 다운로드](#dbeaver-다운로드)
+- [DBeaver 설치](#dbeaver-설치)
+- [DBeaver 설정](#dbeaver-설정)
+- [공통컴포넌트 com 사용자 생성](#공통컴포넌트-com-사용자-생성)
+- [공통컴포넌트 com 테이블 생성](#공통컴포넌트-com-테이블-생성)
+- [apache-tomcat-9.0.102 설치](#apache-tomcat-90102-설치)
+- [git](#git)
+- [context-crypto.xml 파일에서 algorithmKey및 - algorithmKeyHash 기본값 변경](#context-cryptoxml-파일에서-algorithmkey및-algorithmkeyhash-기본값-변경)
+- [단위 테스트](#단위-테스트)
+- [Tibero 7, Tibero 6](#tibero-7-tibero-6)
+- [SVN 설치 가이드(리눅스용)]
+
 ## 전자정부 표준프레임워크 4.3 개발환경 새 폴더
 
 ```
@@ -460,4 +486,62 @@ URL Template : jdbc:tibero:thin:@{host}[:{port}]:{database}
 example : jdbc:tibero:thin:@127.0.0.1:8629:tibero_sid (7번그림 참고)
 Default Port : 8629
 출처: https://javaoop.tistory.com/91 [개쿠:티스토리]
+```
+
+## SVN 설치 가이드(리눅스용)
+
+서버 개발환경 4.3.0 설치가이드
+- https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:dev4.3:svrinstall
+- SVN 설치 가이드(리눅스용)
+- https://www.egovframe.go.kr/wiki/lib/exe/fetch.php?media=egovframework:dev4.0:svn-installation-guide.pdf
+
+로키 리눅스 (Rocky Linux)
+- Rocky-8.10-x86_64-minimal.iso
+- Rocky-8.10-x86_64-dvd1.iso
+- https://rockylinux.org/ko-KR/download
+
+Apache Subversion 바이너리 패키지
+- Apache Subversion Binary Packages
+- Centos Linux
+- https://subversion.apache.org/packages.html#centos
+
+사용자 추가
+su - root
+```sh
+adduser god
+passwd god
+cat /etc/passwd
+cat /etc/group
+```
+
+온라인 설치
+```sh
+yum install subversion
+dnf install subversion
+```
+
+오프라인 설치
+su - god
+```sh
+dnf search subversion
+dnf info subversion
+dnf info subversion-1.10.2
+dnf download --resolve --downloaddir=subversion-1.10.2 subversion
+dnf remove subversion
+dnf remove subversion-libs
+dnf remove subversion && dnf autoremove
+dnf list --installed
+dnf list --installed | grep subversion
+```
+
+오프라인 서버에서 설치
+```sh
+dnf install *.rpm
+rpm -Uvh *.rpm
+svn
+svn help
+svn --version
+svnadmin
+svnadmin help
+svnadmin --version
 ```
