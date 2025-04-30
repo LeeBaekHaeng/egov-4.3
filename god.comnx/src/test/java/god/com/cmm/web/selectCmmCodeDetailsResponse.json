@@ -1,0 +1,157 @@
+{
+	"selectCmmCodeDetailsRequestVO": {
+		"searchCondition": "",
+		"searchKeyword": "",
+		"searchUseYn": "",
+		"pageIndex": 1,
+		"pageUnit": 10,
+		"pageSize": 10,
+		"firstIndex": 1,
+		"lastIndex": 1,
+		"recordCountPerPage": 10,
+		"searchKeywordFrom": "",
+		"searchKeywordTo": "",
+		"codeIds": [
+			"COM001",
+			"COM002"
+		]
+	},
+	"cmmCodeDetails": {
+		"COM002": [
+			{
+				"clCode": "",
+				"codeId": "COM002",
+				"codeIdNm": "",
+				"code": "HIST01",
+				"codeNm": "소프트웨어패치",
+				"codeDc": "소프트웨어패치",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM002",
+				"codeIdNm": "",
+				"code": "HIST02",
+				"codeNm": "소프트웨어설치",
+				"codeDc": "소프트웨어설치",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM002",
+				"codeIdNm": "",
+				"code": "HIST03",
+				"codeNm": "소프트웨어삭제",
+				"codeDc": "소프트웨어삭제",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM002",
+				"codeIdNm": "",
+				"code": "HIST04",
+				"codeNm": "하드웨어업그레이드",
+				"codeDc": "하드웨어업그레이드",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM002",
+				"codeIdNm": "",
+				"code": "HIST05",
+				"codeNm": "하드웨어삭제",
+				"codeDc": "하드웨어삭제",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			}
+		],
+		"COM001": [
+			{
+				"clCode": "",
+				"codeId": "COM001",
+				"codeIdNm": "",
+				"code": "REGC01",
+				"codeNm": "단일 게시판 이용등록",
+				"codeDc": "단일 게시판 이용등록",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM001",
+				"codeIdNm": "",
+				"code": "REGC02",
+				"codeNm": "커뮤니티 등록",
+				"codeDc": "커뮤니티 등록",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM001",
+				"codeIdNm": "",
+				"code": "REGC03",
+				"codeNm": "동호회 등록",
+				"codeDc": "동호회 등록",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM001",
+				"codeIdNm": "",
+				"code": "REGC04",
+				"codeNm": "명함등록",
+				"codeDc": "명함등록",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM001",
+				"codeIdNm": "",
+				"code": "REGC05",
+				"codeNm": "동호회 게시판 등록",
+				"codeDc": "동호회 게시판 등록",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM001",
+				"codeIdNm": "",
+				"code": "REGC06",
+				"codeNm": "커뮤니티 게시판 등록",
+				"codeDc": "커뮤니티 게시판 등록",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			},
+			{
+				"clCode": "",
+				"codeId": "COM001",
+				"codeIdNm": "",
+				"code": "REGC07",
+				"codeNm": "게시판사용자등록",
+				"codeDc": "게시판사용자등록",
+				"useAt": "",
+				"frstRegisterId": "",
+				"lastUpdusrId": ""
+			}
+		]
+	}
+}

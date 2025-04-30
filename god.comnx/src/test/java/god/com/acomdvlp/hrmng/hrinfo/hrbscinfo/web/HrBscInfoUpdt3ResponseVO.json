@@ -1,0 +1,56 @@
+{
+	"searchCondition": "",
+	"searchKeyword": "",
+	"searchUseYn": "",
+	"pageIndex": 1,
+	"pageUnit": 10,
+	"pageSize": 10,
+	"firstIndex": 1,
+	"lastIndex": 1,
+	"recordCountPerPage": 10,
+	"searchKeywordFrom": "",
+	"searchKeywordTo": "",
+	"result": 0,
+	"allErrors": [
+		{
+			"codes": [
+				"errors.required.hrBscInfoUpdt3VO.ipInfo",
+				"errors.required.ipInfo",
+				"errors.required.java.lang.String",
+				"errors.required"
+			],
+			"arguments": [
+				{
+					"codes": [
+						"cop.tmplatNm"
+					],
+					"arguments": null,
+					"defaultMessage": "cop.tmplatNm",
+					"code": "cop.tmplatNm"
+				},
+				{
+					"codes": [
+						"23"
+					],
+					"arguments": null,
+					"defaultMessage": "23",
+					"code": "23"
+				}
+			],
+			"defaultMessage": "errors.required",
+			"objectName": "hrBscInfoUpdt3VO",
+			"field": "ipInfo",
+			"rejectedValue": null,
+			"bindingFailure": false,
+			"code": "errors.required"
+		}
+	],
+	"emplyrId": null,
+	"ipInfo": null,
+	"dplctAt": "Y",
+	"lmttAt": "Y",
+	"frstId": null,
+	"frstPnttm": null,
+	"lastId": null,
+	"lastPnttm": null
+}

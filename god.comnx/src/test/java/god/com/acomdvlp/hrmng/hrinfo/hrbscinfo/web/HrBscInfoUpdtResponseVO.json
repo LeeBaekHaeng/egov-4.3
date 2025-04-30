@@ -1,0 +1,88 @@
+{
+	"searchCondition": "",
+	"searchKeyword": "",
+	"searchUseYn": "",
+	"pageIndex": 1,
+	"pageUnit": 10,
+	"pageSize": 10,
+	"firstIndex": 1,
+	"lastIndex": 1,
+	"recordCountPerPage": 10,
+	"searchKeywordFrom": "",
+	"searchKeywordTo": "",
+	"result": 0,
+	"allErrors": [
+		{
+			"codes": [
+				"errors.maxlength.hrBscInfoUpdtVO.ipInfo",
+				"errors.maxlength.ipInfo",
+				"errors.maxlength.java.lang.String",
+				"errors.maxlength"
+			],
+			"arguments": [
+				{
+					"codes": [
+						"cop.tmplatNm"
+					],
+					"arguments": null,
+					"defaultMessage": "cop.tmplatNm",
+					"code": "cop.tmplatNm"
+				},
+				{
+					"codes": [
+						"23"
+					],
+					"arguments": null,
+					"defaultMessage": "23",
+					"code": "23"
+				}
+			],
+			"defaultMessage": "errors.maxlength",
+			"objectName": "hrBscInfoUpdtVO",
+			"field": "ipInfo",
+			"rejectedValue": "123456789012345678901234",
+			"bindingFailure": false,
+			"code": "errors.maxlength"
+		},
+		{
+			"codes": [
+				"errors.required.hrBscInfoUpdtVO.dplctAt",
+				"errors.required.dplctAt",
+				"errors.required.java.lang.String",
+				"errors.required"
+			],
+			"arguments": [
+				{
+					"codes": [
+						"cop.tmplatNm"
+					],
+					"arguments": null,
+					"defaultMessage": "cop.tmplatNm",
+					"code": "cop.tmplatNm"
+				},
+				{
+					"codes": [
+						"1"
+					],
+					"arguments": null,
+					"defaultMessage": "1",
+					"code": "1"
+				}
+			],
+			"defaultMessage": "errors.required",
+			"objectName": "hrBscInfoUpdtVO",
+			"field": "dplctAt",
+			"rejectedValue": null,
+			"bindingFailure": false,
+			"code": "errors.required"
+		}
+	],
+	"emplyrId": null,
+	"ipInfo": "123456789012345678901234",
+	"dplctAt": null,
+	"lmttAt": "Y",
+	"frstId": null,
+	"frstPnttm": null,
+	"lastId": null,
+	"lastPnttm": null
+}

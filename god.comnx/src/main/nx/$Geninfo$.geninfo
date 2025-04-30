@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <GenInfo version="1.1">
+    <Rule>
+      <ENV rule_version="1.05"/>
+      <ADL rule_version="1.14"/>
+      <FDL rule_version="1.04"/>
+      <XCSS rule_version="1.04"/>
+      <Script rule_version="1.02"/>
+      <GeneratorInfo rule_version="1.3"/>
+    </Rule>
+    <Info project="C:\EGOVFRAMEDEV-4.3.0-64BIT\eGovFrameDev-4.3.0-64bit\workspace-egov\god.comnx\src\main\nx\" generated="C:\EGOVFRAMEDEV-4.3.0-64BIT\eGovFrameDev-4.3.0-64bit\workspace-egov\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\god.comnx\nx\"><File url="typedefinition.xml" checksum="20250430111049" errormsg=""/><File url="appvariables.xml" checksum="20250430101440" errormsg=""/><File url="environment.xml" checksum="20250430101440" errormsg=""/><File url="_resource_\_theme_\blue\theme.xcss" checksum="20250430101440" errormsg=""/><File url="Application_Desktop.xadl" checksum="20250430101440" errormsg=""/><File url="FrameBase\frmMain.xfdl" checksum="20250430101440" errormsg=""/><File url="Work\workAll.xfdl" checksum="20250430101440" errormsg=""/><File url="Work\workGeneral.xfdl" checksum="20250430110646" errormsg=""/><File url="Work\workFrames.xfdl" checksum="20250430101440" errormsg=""/><File url="Work\workForms.xfdl" checksum="20250430101440" errormsg=""/><File url="Work\workComponents.xfdl" checksum="20250430112645" errormsg=""/><File url="Work\workFormPrint.xfdl" checksum="20250430101440" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\framework\Framework.json" checksum="20250225093538" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\resources\Resource.json" checksum="20250225093538" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\CompBase.json" checksum="20250225093534" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\ComComp.json" checksum="20250225093532" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\Grid.json" checksum="20250225093534" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\ListView.json" checksum="20250225093538" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\DeviceAPI.json" checksum="20250225093534" errormsg=""/><File url="Base\sampleForm01.xfdl" checksum="20250430101440" errormsg=""/><File url="Base\sampleForm02.xfdl" checksum="20250430101440" errormsg=""/><File url="Base\sampleForm03.xfdl" checksum="20250430101440" errormsg=""/><File url="Lib\libComm.xjs" checksum="20250430101440" errormsg=""/><File url="Comm\commSelectXeniPath.xfdl" checksum="20250430101440" errormsg=""/></Info>
+  </GenInfo>
+</root>

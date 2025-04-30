@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- Mybatis setup for Mybatis Database Layer -->
+	<bean id="god.sqlSession"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="egov.dataSource" />
+		<property name="configLocation"
+			value="classpath:/god/mapper/config/mapper-config.xml" />
+
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:/god/mapper/com/**/*_${Globals.DbType}.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 3.2 Mapper interface 사용 방식 -->
+	<bean
+		class="org.egovframe.rte.psl.dataaccess.mapper.MapperConfigurer">
+		<property name="basePackage" value="god.com.**.service.impl" />
+
+		<property name="sqlSessionFactoryBeanName"
+			value="god.sqlSession" />
+	</bean>
+
+</beans>
