@@ -81,7 +81,6 @@ public class ComCmmController {
 		DataSet input1 = reqPlatformData.getDataSet("input1");
 
 		// Service
-
 		List<ComDefaultCodeVO> comDefaultCodeVOs = new ArrayList<>();
 		for (int i = 0; i < input1.getRowCount(); i++) {
 			String prefix = input1.getString(i, "prefix");
@@ -107,6 +106,9 @@ public class ComCmmController {
 
 		int row = 0;
 
+		// resPlatformData
+		PlatformData resPlatformData = new PlatformData();
+
 		for (Map.Entry<String, List<CmmnDetailCode>> entry : cmmCodeDetails.entrySet()) {
 			String key = entry.getKey();
 			List<CmmnDetailCode> value = entry.getValue();
@@ -124,10 +126,9 @@ public class ComCmmController {
 				ds.set(row, "comp_id", cmmnDetailCode.getCodeDc());
 				ds.set(row, "comp_event", "");
 			}
-		}
 
-		// resPlatformData
-		PlatformData resPlatformData = new PlatformData();
+			resPlatformData.addDataSet(selectCmmCodeDetailsnx(key, value));
+		}
 
 		VariableList resVariableList = resPlatformData.getVariableList();
 		resVariableList.add("ErrorCode", 0);
@@ -135,10 +136,35 @@ public class ComCmmController {
 
 		resPlatformData.addDataSet(ds);
 
+		if (log.isDebugEnabled()) {
+			log.debug("saveXml={}", resPlatformData.saveXml());
+		}
+
 		// res
 		HttpPlatformResponse res = new HttpPlatformResponse(response, PlatformType.CONTENT_TYPE_XML);
 		res.setData(resPlatformData);
 		res.sendData();
+	}
+
+	private DataSet selectCmmCodeDetailsnx(String key, List<CmmnDetailCode> value) {
+		DataSet ds = new DataSet(key);
+
+		ds.addColumn("codeId", DataTypes.STRING, 6);
+		ds.addColumn("code", DataTypes.STRING, 15);
+		ds.addColumn("codeNm", DataTypes.STRING, 60);
+		ds.addColumn("codeDc", DataTypes.STRING, 200);
+
+		int row = 0;
+
+		for (CmmnDetailCode cmmnDetailCode : value) {
+			row = ds.newRow();
+			ds.set(row, "codeId", cmmnDetailCode.getCodeId());
+			ds.set(row, "code", cmmnDetailCode.getCode());
+			ds.set(row, "codeNm", cmmnDetailCode.getCodeNm());
+			ds.set(row, "codeDc", cmmnDetailCode.getCodeDc());
+		}
+
+		return ds;
 	}
 
 }

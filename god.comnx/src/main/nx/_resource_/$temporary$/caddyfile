@@ -1,0 +1,8 @@
+﻿{
+admin off
+}
+:4098
+{
+root "C:/EGOVFRAMEDEV-4.3.0-64BIT/eGovFrameDev-4.3.0-64bit/workspace-egov/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/god.comnx/nx"
+file_server
+}
