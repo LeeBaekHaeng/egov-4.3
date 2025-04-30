@@ -89,15 +89,18 @@ this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 
 	var strInDatasets = "input1=DataSet00 input2=DataSet01";
 	
-	var strOutDatasets = "DataSet00=output0 DataSet01=output1";
+//	var strOutDatasets = "DataSet00=output0 DataSet01=output1";
+	var strOutDatasets = "dsComponents=customers DataSet01=output1";
 	
 	var strArgument = "argu0=test argu1=30";
+//	var strArgument = "";
 	
 //	var bAsync = true;
 //	var nDataType = 0;
 //	var bCompress = false;
 
-	this.transaction("selectCmmCodeDetails", "Service0::/cmm/selectCmmCodeDetailsnx.do", "", "", strArgument, "btnSearch_onclick_strCallbackFunc");
+//	this.transaction("selectCmmCodeDetails", "Service0::/test/initdata.jsp", strInDatasets, strOutDatasets, strArgument, "btnSearch_onclick_strCallbackFunc");
+	this.transaction("selectCmmCodeDetails", "Service0::/cmm/selectCmmCodeDetailsnx.do", strInDatasets, strOutDatasets, strArgument, "btnSearch_onclick_strCallbackFunc");
 
 };
 

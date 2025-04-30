@@ -387,11 +387,13 @@ Server [API,XENI]
 - https://mangosteen.tobesoft.co.kr/nexus/repository/maven-public/
 
 pom.xml dependency groupId
+
 ```
 com.nexacro
 ```
 
 Generate Path
+
 ```
 C:\EGOVFRAMEDEV-4.3.0-64BIT\eGovFrameDev-4.3.0-64bit\workspace-egov\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\god.comnx\nx
 ```
