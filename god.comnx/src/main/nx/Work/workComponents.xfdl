@@ -49,6 +49,14 @@
           <Column id="comp_id" type="STRING" size="256"/>
           <Column id="comp_event" type="STRING" size="256"/>
         </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="prefix">COM001</Col>
+          </Row>
+          <Row>
+            <Col id="prefix">COM002</Col>
+          </Row>
+        </Rows>
       </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[include "Lib::libComm.xjs";
@@ -87,7 +95,8 @@ this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 //	var strSvcID = "";
 //	var strURL = "";
 
-	var strInDatasets = "input1=DataSet00 input2=DataSet01";
+//	var strInDatasets = "input1=DataSet00 input2=DataSet01";
+	var strInDatasets = "input1=dsComponents input2=DataSet01";
 	
 //	var strOutDatasets = "DataSet00=output0 DataSet01=output1";
 	var strOutDatasets = "dsComponents=customers DataSet01=output1";

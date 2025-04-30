@@ -52,7 +52,7 @@
     <!-- IP 정보 기록 및 로그인 체크가 필요한 URL과 로그인 여부를 체크해줄 인터셉터를 등록한다. -->
     <!-- 분리 -->
     
-	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	<!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="defaultErrorView" value="egovframework/com/cmm/error/egovError"/>
 		<property name="exceptionMappings">
 			<props>
@@ -64,7 +64,7 @@
 				<prop key="egovframework.com.cmm.exception.EgovFileExtensionException">egovframework/com/cmm/error/egovFileExtensionException</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> -->
 
 	<!-- for JFile -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>

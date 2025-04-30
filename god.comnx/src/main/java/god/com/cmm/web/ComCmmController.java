@@ -2,24 +2,27 @@ package god.com.cmm.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.nexacro.java.xapi.data.DataSet;
 import com.nexacro.java.xapi.data.DataTypes;
 import com.nexacro.java.xapi.data.PlatformData;
 import com.nexacro.java.xapi.data.VariableList;
+import com.nexacro.java.xapi.tx.HttpPlatformRequest;
 import com.nexacro.java.xapi.tx.HttpPlatformResponse;
 import com.nexacro.java.xapi.tx.PlatformException;
 import com.nexacro.java.xapi.tx.PlatformType;
 
 import egovframework.com.cmm.ComDefaultCodeVO;
+import egovframework.com.cmm.service.CmmnDetailCode;
 import egovframework.com.cmm.service.EgovCmmUseService;
 import god.com.cmm.web.service.SelectCmmCodeDetailsRequestVO;
 import lombok.RequiredArgsConstructor;
@@ -54,95 +57,88 @@ public class ComCmmController {
 		return "jsonView";
 	}
 
-	@RequestMapping("/cmm/selectCmmCodeDetailsnx.do")
-	public void selectCmmCodeDetailsnx(HttpServletResponse response) {
-		/** 3. Creating a basic object of Nexacro **/
-		PlatformData pdata = new PlatformData();
+	@PostMapping("/cmm/selectCmmCodeDetailsnx.do")
+	public void selectCmmCodeDetailsnx(HttpServletRequest request, HttpServletResponse response)
+			throws PlatformException {
 
-		/** 5-1. Processing ErrorCode and ErrorMsg **/
-		int nErrorCode = 0;
-		String strErrorMsg = "START";
+		// req
+		HttpPlatformRequest req = new HttpPlatformRequest(request);
+		req.receiveData();
+
+		// reqPlatformData
+		PlatformData reqPlatformData = req.getData();
+
+		// 단일 데이터(Variable) 참조
+		VariableList reqVariableList = reqPlatformData.getVariableList();
+		String argu0 = reqVariableList.getString("argu0");
+		String argu1 = reqVariableList.getString("argu1");
+		if (log.isDebugEnabled()) {
+			log.debug("argu0={}", argu0);
+			log.debug("argu1={}", argu1);
+		}
+
+		// DataSet의 2차원 데이터 참조
+		DataSet input1 = reqPlatformData.getDataSet("input1");
+
+		// Service
+
+		List<ComDefaultCodeVO> comDefaultCodeVOs = new ArrayList<>();
+		for (int i = 0; i < input1.getRowCount(); i++) {
+			String prefix = input1.getString(i, "prefix");
+
+			if (log.isDebugEnabled()) {
+				log.debug("prefix={}", prefix);
+			}
+
+			ComDefaultCodeVO comDefaultCodeVO = new ComDefaultCodeVO();
+			comDefaultCodeVO.setCodeId(prefix);
+			comDefaultCodeVOs.add(comDefaultCodeVO);
+		}
+
+		Map<String, List<CmmnDetailCode>> cmmCodeDetails = egovCmmUseService.selectCmmCodeDetails(comDefaultCodeVOs);
 
 		DataSet ds = new DataSet("customers");
 
-		try {
-			/** 4. Processing data: saving data as a file **/
-			/** 4.1 Creating a dataset and inputting basic data to the dataset **/
-			ds.addColumn("prefix", DataTypes.STRING, 4);
-			ds.addColumn("form_id", DataTypes.STRING, 16);
-			ds.addColumn("form_title", DataTypes.STRING, 32);
-			ds.addColumn("comp_id", DataTypes.STRING, 16);
-			ds.addColumn("comp_event", DataTypes.STRING, 32);
+		ds.addColumn("prefix", DataTypes.STRING);
+		ds.addColumn("form_id", DataTypes.STRING);
+		ds.addColumn("form_title", DataTypes.STRING);
+		ds.addColumn("comp_id", DataTypes.STRING);
+		ds.addColumn("comp_event", DataTypes.STRING);
 
-			ds.addColumn("department", DataTypes.STRING, 32);
-			ds.addColumn("comp_phone", DataTypes.STRING, 16);
-			ds.addColumn("comp_addr", DataTypes.STRING, 256);
+		int row = 0;
 
-			int row = 0;
-			int i = 0;
-			String[] customers = new String[8];
+		for (Map.Entry<String, List<CmmnDetailCode>> entry : cmmCodeDetails.entrySet()) {
+			String key = entry.getKey();
+			List<CmmnDetailCode> value = entry.getValue();
 
-			customers[0] = "TC-001";
-			customers[1] = "Tzuyu";
-			customers[2] = "ceo@twice.com";
-			customers[3] = "6987-6543";
-			customers[4] = "TWICE";
-
-			customers[5] = "0";
-			customers[6] = "6506-7000";
-			customers[7] = "Seoul";
-
-			for (i = 0; i < 1; i++) {
-				row = ds.newRow();
-				ds.set(row, "prefix", customers[0]);
-				ds.set(row, "form_id", customers[1]);
-				ds.set(row, "form_title", customers[2]);
-				ds.set(row, "comp_id", customers[3]);
-				ds.set(row, "comp_event", customers[4]);
-
-				ds.set(row, "department", customers[5]);
-				ds.set(row, "comp_phone", customers[6]);
-				ds.set(row, "comp_addr", customers[7]);
+			if (log.isDebugEnabled()) {
+				log.debug("key={}", key);
+				log.debug("value={}", value);
 			}
 
-			pdata.addDataSet(ds);
-
-			/** 4.2 Saving a dataset to a file **/
-//		     String targetFilename = "./saveFile.bin";
-//		     OutputStream target = new FileOutputStream(targetFilename);
-//		     PlatformResponse res = new PlatformResponse(target, 
-//		         PlatformType.CONTENT_TYPE_BINARY);
-//		     res.setData(pdata);
-//		     res.sendData();
-//		     target.close(); 
-//		     System.out.println("after file write.."); 
-
-			/** 5.2 Setting ErrorCode and ErrorMsg for success **/
-			nErrorCode = 0;
-			strErrorMsg = "SUCC";
-
-		} catch (Throwable th) {
-			/** 5.3 Setting ErrorCode and ErrorMsg for failure **/
-			nErrorCode = -1;
-			strErrorMsg = th.getMessage();
+			for (CmmnDetailCode cmmnDetailCode : value) {
+				row = ds.newRow();
+				ds.set(row, "prefix", cmmnDetailCode.getCodeId());
+				ds.set(row, "form_id", cmmnDetailCode.getCode());
+				ds.set(row, "form_title", cmmnDetailCode.getCodeNm());
+				ds.set(row, "comp_id", cmmnDetailCode.getCodeDc());
+				ds.set(row, "comp_event", "");
+			}
 		}
 
-		/** 5.4 Saving the ErrorCode and ErrorMsg to send them to the client **/
-		PlatformData senddata = new PlatformData();
-		VariableList varList = senddata.getVariableList();
-		varList.add("ErrorCode", nErrorCode);
-		varList.add("ErrorMsg", strErrorMsg);
+		// resPlatformData
+		PlatformData resPlatformData = new PlatformData();
 
-		senddata.addDataSet(ds);
+		VariableList resVariableList = resPlatformData.getVariableList();
+		resVariableList.add("ErrorCode", 0);
+		resVariableList.add("ErrorMsg", "SUCC");
 
-		/** 6. Sending result data to the client **/
-		HttpPlatformResponse res = new HttpPlatformResponse(response, PlatformType.CONTENT_TYPE_XML, "UTF-8");
-		res.setData(senddata);
-		try {
-			res.sendData();
-		} catch (PlatformException e) {
-			throw new BaseRuntimeException("PlatformException res.sendData();", e);
-		}
+		resPlatformData.addDataSet(ds);
+
+		// res
+		HttpPlatformResponse res = new HttpPlatformResponse(response, PlatformType.CONTENT_TYPE_XML);
+		res.setData(resPlatformData);
+		res.sendData();
 	}
 
 }
