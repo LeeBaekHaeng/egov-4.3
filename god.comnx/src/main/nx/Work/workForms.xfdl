@@ -26,10 +26,10 @@
                 <Cell col="3" text="path"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:prefix" suppress="1"/>
-                <Cell col="1" text="bind:id"/>
-                <Cell col="2" text="bind:title"/>
-                <Cell col="3" text="bind:path"/>
+                <Cell text="bind:codeId" suppress="1"/>
+                <Cell col="1" text="bind:code"/>
+                <Cell col="2" text="bind:codeNm"/>
+                <Cell col="3" text="bind:codeDc"/>
               </Band>
             </Format>
           </Formats>
@@ -40,11 +40,19 @@
     <Objects>
       <Dataset id="dsForms">
         <ColumnInfo>
-          <Column id="prefix" type="STRING" size="256"/>
-          <Column id="id" type="STRING" size="256"/>
-          <Column id="title" type="STRING" size="256"/>
-          <Column id="path" type="STRING" size="256"/>
+          <Column id="codeId" type="STRING" size="256" description="코드ID"/>
+          <Column id="code" type="STRING" size="256" description="상세코드"/>
+          <Column id="codeNm" type="STRING" size="256" description="상세코드명"/>
+          <Column id="codeDc" type="STRING" size="256" description="상세코드설명"/>
         </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codeId">COM001</Col>
+          </Row>
+          <Row>
+            <Col id="codeId">COM002</Col>
+          </Row>
+        </Rows>
       </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[include "Lib::libComm.xjs";
@@ -76,10 +84,48 @@
 this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	// request forms information of nexacrostudio project
-	var sRtn = nexacrostudio.request(requesttype.forms);
+/*	var sRtn = nexacrostudio.request(requesttype.forms);
 	var objJSON = JSON.parse(sRtn);
 	
 	this.fnMakeFormsData(objJSON);
+*/
+
+
+//	var strSvcID = "";
+//	var strURL = "";
+
+//	var strInDatasets = "input1=DataSet00 input2=DataSet01";
+	var strInDatasets = "input1=dsForms input2=DataSet01";
+	
+//	var strOutDatasets = "DataSet00=output0 DataSet01=output1";
+	var strOutDatasets = "dsForms=output1 DataSet01=output2";
+//	var strOutDatasets = "-dsForms=output1 dsForms=output2";
+	
+	var strArgument = "argu0=test argu1=30";
+//	var strArgument = "";
+
+	var strCallbackFunc = "btnSearch_onclick_strCallbackFunc";
+	
+//	var bAsync = true;
+//	var nDataType = 0;
+//	var bCompress = false;
+
+	this.transaction("selectCmmCodeDetailsnx2", "Service0::/cmm/selectCmmCodeDetailsnx2.do", strInDatasets, strOutDatasets, strArgument, strCallbackFunc);
+};
+
+this.btnSearch_onclick_strCallbackFunc = function(id, code, message)
+{
+	trace("id=" + id);
+	trace("code=" + code);
+	trace("message=" + message);
+
+	if (code == 0) {
+          //this.alert(this.dsCustomers.rowcount + " numbers of data have been found.");
+          //trace(this.dsCustomers.rowcount + " numbers of data have been found.");
+     } else {
+          this.alert("Error["+code+"]:"+message);
+          trace("Error["+code+"]:"+message);
+     }
 };
 
 this.fnMakeFormsData = function(objJSON)

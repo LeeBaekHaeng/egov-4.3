@@ -20,6 +20,8 @@ import com.nexacro.java.xapi.tx.HttpPlatformRequest;
 import com.nexacro.java.xapi.tx.HttpPlatformResponse;
 import com.nexacro.java.xapi.tx.PlatformException;
 import com.nexacro.java.xapi.tx.PlatformType;
+import com.nexacro.uiadapter.spring.core.annotation.ParamDataSet;
+import com.nexacro.uiadapter.spring.core.data.NexacroResult;
 
 import egovframework.com.cmm.ComDefaultCodeVO;
 import egovframework.com.cmm.service.CmmnDetailCode;
@@ -165,6 +167,62 @@ public class ComCmmController {
 		}
 
 		return ds;
+	}
+
+	@PostMapping("/cmm/selectCmmCodeDetailsnx2.do")
+	public NexacroResult selectCmmCodeDetailsnx2(
+			@ParamDataSet(name = "input1") List<ComDefaultCodeVO> comDefaultCodeVOs,
+			@ParamDataSet(name = "input1") ComDefaultCodeVO comDefaultCodeVO) {
+		if (log.isDebugEnabled()) {
+			log.debug("comDefaultCodeVOs={}", comDefaultCodeVOs);
+			log.debug("comDefaultCodeVO={}", comDefaultCodeVO);
+		}
+
+		for (ComDefaultCodeVO item : comDefaultCodeVOs) {
+			if (log.isDebugEnabled()) {
+				log.debug("item={}", item);
+				log.debug("getCodeId={}", item.getCodeId());
+				log.debug("getCode={}", item.getCode());
+				log.debug("getCodeNm={}", item.getCodeNm());
+				log.debug("getCodeDc={}", item.getCodeDc());
+			}
+		}
+
+		List<CmmnDetailCode> cmmCodeDetail = egovCmmUseService.selectCmmCodeDetail(comDefaultCodeVO);
+
+		for (CmmnDetailCode item : cmmCodeDetail) {
+			int rowType = item.getRowType();
+
+			if (log.isDebugEnabled()) {
+				log.debug("item={}", item);
+				log.debug("rowType={}", rowType);
+			}
+
+			if (rowType == DataSet.ROW_TYPE_NORMAL) {
+				if (log.isDebugEnabled()) {
+					log.debug("일반 행 (0)");
+				}
+			} else if (rowType == DataSet.ROW_TYPE_INSERTED) {
+				if (log.isDebugEnabled()) {
+					log.debug("추가 된 행 (1)");
+				}
+			} else if (rowType == DataSet.ROW_TYPE_UPDATED) {
+				if (log.isDebugEnabled()) {
+					log.debug("값이 변경 된 행 (2)");
+				}
+			} else if (rowType == DataSet.ROW_TYPE_DELETED) {
+				if (log.isDebugEnabled()) {
+					log.debug("삭제된 행 (3)");
+				}
+			}
+		}
+
+		NexacroResult nexacroResult = new NexacroResult();
+
+		nexacroResult.addDataSet("output1", cmmCodeDetail);
+		nexacroResult.addDataSet("output2", egovCmmUseService.selectOgrnztIdDetail(null));
+
+		return nexacroResult;
 	}
 
 }

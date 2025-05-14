@@ -34,4 +34,43 @@
       <location>/code500.jsp</location>
     </error-page> -->
 
+	<servlet>
+		<servlet-name>XExportImport</servlet-name>
+		<servlet-class>com.nexacro.java.xeni.services.GridExportImportServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>XImport</servlet-name>
+		<servlet-class>com.nexacro.java.xeni.services.GridExportImportServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>XExportImport</servlet-name>
+		<url-pattern>/XExportImport</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>XImport</servlet-name>
+		<url-pattern>/XImport</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>export-path</param-name>
+		<param-value>/export</param-value>
+	</context-param>
+	<context-param>
+		<param-name>import-path</param-name>
+		<param-value>/import</param-value>
+	</context-param>
+	<context-param>
+		<param-name>monitor-enabled</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>monitor-cycle-time</param-name>
+		<param-value>30</param-value>
+	</context-param>
+	<context-param>
+		<param-name>file-storage-time</param-name>
+		<param-value>10</param-value>
+	</context-param>
+
 </web-app>

@@ -229,7 +229,16 @@ this.btnExportCSV_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo
 
 this.btnExportExcel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	this.gfnExportExcel("ComponentsInformation", this.grdComponents);
+//	this.gfnExportExcel("ComponentsInformation", this.grdComponents);
+
+	this.gfnExportExcel("ComponentsInformation", this.dsComponents);
+
+/*    this.exportObj = new ExcelExportObject();
+    var ret = this.exportObj.addExportItem(nexacro.ExportItemTypes.GRID, 
+        this.dsComponents, "Sheet1!A1");
+    this.exportObj.exporturl = "http://localhost:8080/comnx/XExportImport";
+    this.exportObj.exportData(); 
+	alert("test");*/
 };
 ]]></Script>
   </Form>

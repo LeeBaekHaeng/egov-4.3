@@ -567,12 +567,16 @@
 			<!--<version>1.5.1-SNAPSHOT</version>-->
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>com.nexacro</groupId>
 			<artifactId>uiadapter-spring-core</artifactId>
 			<version>1.4.7-20250320.013912-2</version>
 			<exclusions>
 				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<!--<exclusion>
 					<groupId>javax.servlet</groupId>
 					<artifactId>jstl</artifactId>
 				</exclusion>
@@ -583,7 +587,7 @@
 				<exclusion>
 					<groupId>org.apache.commons</groupId>
 					<artifactId>commons-lang3</artifactId>
-				</exclusion>
+				</exclusion>-->
 			</exclusions>
 		</dependency>
 
@@ -593,6 +597,10 @@
 			<version>1.4.5-20250320.013915-3</version>
 			<exclusions>
 				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<!--<exclusion>
 					<groupId>com.nexacro</groupId>
 					<artifactId>uiadapter-spring-core</artifactId>
 				</exclusion>
@@ -639,7 +647,7 @@
 				<exclusion>
 					<groupId>commons-dbcp</groupId>
 					<artifactId>commons-dbcp</artifactId>
-				</exclusion>
+				</exclusion>-->
 			</exclusions>
 		</dependency>
 
@@ -649,6 +657,10 @@
 			<version>1.3.12-20250325.013241-4</version>
 			<exclusions>
 				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<!--<exclusion>
 					<groupId>com.nexacro</groupId>
 					<artifactId>nexacroN-xapi</artifactId>
 				</exclusion>
@@ -711,9 +723,9 @@
 				<exclusion>
 					<groupId>org.dom4j</groupId>
 					<artifactId>dom4j</artifactId>
-				</exclusion>
+				</exclusion>-->
 			</exclusions>
-		</dependency>-->
+		</dependency>
 
 	</dependencies>
 
