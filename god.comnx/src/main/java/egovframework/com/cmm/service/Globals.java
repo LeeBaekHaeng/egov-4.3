@@ -1,5 +1,7 @@
 package egovframework.com.cmm.service;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Class Name : Globals.java Description : 시스템 구동 시 프로퍼티를 통해 사용될 전역변수를 정의한다.
  * Modification Information
@@ -13,8 +15,40 @@ package egovframework.com.cmm.service;
  * @see
  *
  */
-
+@Slf4j
 public class Globals {
+
+	public static final String ENV;
+	public static final String ENV_DEV = "dev";
+	public static final String ENV_TEST = "test";
+	public static final String ENV_PROD = "prod";
+
+	static {
+		ENV = System.getProperty("env");
+
+		if (log.isDebugEnabled()) {
+			log.debug("env={}", ENV);
+		}
+
+		if (Globals.ENV_DEV.equals(ENV)) {
+			if (log.isDebugEnabled()) {
+				log.debug("개발");
+			}
+		} else if (Globals.ENV_TEST.equals(ENV)) {
+			if (log.isDebugEnabled()) {
+				log.debug("검증");
+			}
+		} else if (Globals.ENV_PROD.equals(ENV)) {
+			if (log.isDebugEnabled()) {
+				log.debug("운영");
+			}
+		} else {
+			if (log.isDebugEnabled()) {
+				log.debug("로컬");
+			}
+		}
+	}
+
 	// OS 유형
 	public static final String OS_TYPE = EgovProperties.getProperty("Globals.OsType");
 	// DB 유형
@@ -58,4 +92,11 @@ public class Globals {
 	public static final String FILE_UP_EXTS = EgovProperties.getProperty("Globals.fileUpload.Extensions");
 	// 파일 업로드 최대 용량
 	public static final String FILE_UP_MAX_SIZE = EgovProperties.getProperty("Globals.fileUpload.maxSize");
+
+	/**
+	 * 국세청_사업자등록정보 진위확인 및 상태조회 서비스 웹 주소
+	 */
+	public static final String DATA_NTS_BUSINESSMAN_URL = EgovProperties
+			.getProperty("Globals.data.nts-businessman.Url");
+
 }

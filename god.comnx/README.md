@@ -400,3 +400,17 @@ C:\EGOVFRAMEDEV-4.3.0-64BIT\eGovFrameDev-4.3.0-64bit\workspace-egov\.metadata\.p
 
 웹브라우저에서 아래 주소로 접근했을 때 설치 정보가 정상적으로 표시되는지 확인합니다. 설치정보가 표시된다면 정상적으로 X-API가 설치된 겁니다.
 - http://localhost:8080/comnx/nx.jsp
+
+## mvn profile
+
+https://maven.apache.org/guides/introduction/introduction-to-profiles.html
+
+Naming Conventions
+- 명명 규칙
+- -Denv=dev
+- -Denv=test
+- -Denv=prod
+
+```
+-Denv=dev -DDenv=test -DDenv=prod
+```

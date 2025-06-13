@@ -7,10 +7,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestTemplate;
 
 import com.nexacro.java.xapi.data.DataSet;
 import com.nexacro.java.xapi.data.DataTypes;
@@ -26,6 +28,7 @@ import com.nexacro.uiadapter.spring.core.data.NexacroResult;
 import egovframework.com.cmm.ComDefaultCodeVO;
 import egovframework.com.cmm.service.CmmnDetailCode;
 import egovframework.com.cmm.service.EgovCmmUseService;
+import egovframework.com.cmm.service.Globals;
 import god.com.cmm.web.service.SelectCmmCodeDetailsRequestVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +59,61 @@ public class ComCmmController {
 
 		model.addAttribute("cmmCodeDetails", egovCmmUseService.selectCmmCodeDetails(comDefaultCodeVOs));
 
+		selectCmmCodeDetails();
+		selectCmmCodeDetails2();
+
 		return "jsonView";
+	}
+
+	private void selectCmmCodeDetails() {
+		if (Globals.ENV_DEV.equals(Globals.ENV)) {
+			if (log.isDebugEnabled()) {
+				log.debug("개발");
+			}
+		} else if (Globals.ENV_TEST.equals(Globals.ENV)) {
+			if (log.isDebugEnabled()) {
+				log.debug("검증");
+			}
+		} else if (Globals.ENV_PROD.equals(Globals.ENV)) {
+			if (log.isDebugEnabled()) {
+				log.debug("운영");
+			}
+		} else {
+			if (log.isDebugEnabled()) {
+				log.debug("로컬");
+			}
+		}
+	}
+
+	private void selectCmmCodeDetails2() {
+//		RestTemplate restTemplate = new RestTemplate();
+
+		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+		int connectTimeout = 3000;
+		requestFactory.setConnectTimeout(connectTimeout);
+		requestFactory.setReadTimeout(connectTimeout);
+		RestTemplate restTemplate = new RestTemplate(requestFactory);
+
+		if (log.isDebugEnabled()) {
+			log.debug("DATA_NTS_BUSINESSMAN_URL={}", Globals.DATA_NTS_BUSINESSMAN_URL);
+		}
+
+		String responseBody = restTemplate.getForObject(Globals.DATA_NTS_BUSINESSMAN_URL + "/validate", String.class);
+
+//		String responseBody;
+//		try {
+//			responseBody = restTemplate.getForObject(Globals.DATA_NTS_BUSINESSMAN_URL + "/validate", String.class);
+//		} catch (HttpClientErrorException e) {
+//			if (log.isErrorEnabled()) {
+//				log.error("HttpClientErrorException ");
+//			}
+//
+//			responseBody = e.getResponseBodyAsString();
+//		}
+
+		if (log.isDebugEnabled()) {
+			log.debug("responseBody={}", responseBody);
+		}
 	}
 
 	@PostMapping("/cmm/selectCmmCodeDetailsnx.do")
