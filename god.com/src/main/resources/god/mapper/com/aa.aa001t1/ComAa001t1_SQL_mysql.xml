@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:50:59 
+	KST 2016 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="god.com.aa.aa001t1.service.impl.ComAa001t1Mapper">
+
+	<insert id="insertComAa001t1"
+		parameterType="god.com.aa.aa001t1.service.ComAa001t1VO">
+<![CDATA[
+INSERT /* ComAa001t1Mapper.insertComAa001t1 */ INTO COMTNLOGINPOLICY (
+       EMPLYR_ID /* 업무사용자ID */
+     , IP_INFO /* IP정보 */
+     , DPLCT_PERM_AT /* 중복허용여부 */
+     , LMTT_AT /* 제한여부 */
+     , FRST_REGISTER_ID
+     , FRST_REGIST_PNTTM
+     , LAST_UPDUSR_ID
+     , LAST_UPDT_PNTTM
+     ) VALUES (
+       #{emplyrId} /* 업무사용자ID */
+     , #{ipInfo} /* IP정보 */
+     , #{dplctPermAt} /* 중복허용여부 */
+     , #{lmttAt} /* 제한여부 */
+     , #{frstRegisterId} /* 최초등록자ID */
+     , #{frstRegistPnttm} /* 최초등록시점 */
+     , #{lastUpdusrId} /* 최종수정자ID */
+     , #{lastUpdtPnttm} /* 최종수정시점 */
+     )
+]]>
+	</insert>
+
+	<sql id="test">
+<![CDATA[
+]]>
+	</sql>
+
+</mapper>

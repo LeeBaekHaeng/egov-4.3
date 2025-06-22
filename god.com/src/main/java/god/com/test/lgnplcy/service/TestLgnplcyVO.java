@@ -40,32 +40,32 @@ public class TestLgnplcyVO extends TestLgnplcyDefaultVO {
 	 */
 	private String lmttAt;
 
-	/**
-	 * 최초등록자ID
-	 * 
-	 * @컬럼 `FRST_REGISTER_ID` varchar(20) DEFAULT NULL COMMENT '최초등록자ID',
-	 */
-	private String frstRegisterId;
-
-	/**
-	 * 최초등록시점
-	 * 
-	 * @컬럼 `FRST_REGIST_PNTTM` datetime DEFAULT NULL COMMENT '최초등록시점',
-	 */
-	private String frstRegistPnttm;
-
-	/**
-	 * 최종수정자ID
-	 * 
-	 * @컬럼 `LAST_UPDUSR_ID` varchar(20) DEFAULT NULL COMMENT '최종수정자ID',
-	 */
-	private String lastUpdusrId;
-
-	/**
-	 * 최종수정시점
-	 * 
-	 * @컬럼 `LAST_UPDT_PNTTM` datetime DEFAULT NULL COMMENT '최종수정시점',
-	 */
-	private String lastUpdtPnttm;
+//	/**
+//	 * 최초등록자ID
+//	 * 
+//	 * @컬럼 `FRST_REGISTER_ID` varchar(20) DEFAULT NULL COMMENT '최초등록자ID',
+//	 */
+//	private String frstRegisterId;
+//
+//	/**
+//	 * 최초등록시점
+//	 * 
+//	 * @컬럼 `FRST_REGIST_PNTTM` datetime DEFAULT NULL COMMENT '최초등록시점',
+//	 */
+//	private String frstRegistPnttm;
+//
+//	/**
+//	 * 최종수정자ID
+//	 * 
+//	 * @컬럼 `LAST_UPDUSR_ID` varchar(20) DEFAULT NULL COMMENT '최종수정자ID',
+//	 */
+//	private String lastUpdusrId;
+//
+//	/**
+//	 * 최종수정시점
+//	 * 
+//	 * @컬럼 `LAST_UPDT_PNTTM` datetime DEFAULT NULL COMMENT '최종수정시점',
+//	 */
+//	private String lastUpdtPnttm;
 
 }
