@@ -5,6 +5,7 @@ import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import egovframework.com.cmm.EgovMessageSource;
 import god.com.test.lgnplcy.service.TestLgnplcyService;
 import god.com.test.lgnplcy.service.TestLgnplcyVO;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 public class TestLgnplcyServiceImpl extends EgovAbstractServiceImpl implements TestLgnplcyService {
 
 	private final TestLgnplcyMapper testLgnplcyMapper;
+
+	private final EgovMessageSource egovMessageSource;
 
 	/**
 	 * <pre>
@@ -36,6 +39,11 @@ public class TestLgnplcyServiceImpl extends EgovAbstractServiceImpl implements T
 
 		try {
 			result = testLgnplcyMapper.selectTestLgnplcy(testLgnplcyVO);
+
+			if (result == null) {
+				throw new BaseRuntimeException(
+						"selectTestLgnplcy result " + egovMessageSource.getMessage("info.nodata.msg"));
+			}
 		} catch (DataAccessException e) {
 			if (log.isErrorEnabled()) {
 				log.error("DataAccessException: selectTestLgnplcy", e);
