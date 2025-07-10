@@ -1,5 +1,6 @@
 package god.com.test.lgnplcy.web;
 
+import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,9 +21,10 @@ public class TestLgnplcyRestController {
 	 * 
 	 * @param testLgnplcyVO
 	 * @return
+	 * @throws Exception
 	 */
 	@PostMapping("/api/test/lgnplcy/selectTestLgnplcy.do")
-	public TestLgnplcyVO selectTestLgnplcy(TestLgnplcyVO testLgnplcyVO) {
+	public TestLgnplcyVO selectTestLgnplcy(TestLgnplcyVO testLgnplcyVO) throws BaseRuntimeException, Exception {
 		log.debug("testLgnplcyVO={}", testLgnplcyVO);
 		return testLgnplcyService.selectTestLgnplcy(testLgnplcyVO);
 	}

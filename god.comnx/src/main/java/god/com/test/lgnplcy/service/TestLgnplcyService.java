@@ -1,5 +1,7 @@
 package god.com.test.lgnplcy.service;
 
+import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
+
 public interface TestLgnplcyService {
 
 	/**
@@ -8,6 +10,6 @@ public interface TestLgnplcyService {
 	 * @param testLgnplcyVO
 	 * @return
 	 */
-	TestLgnplcyVO selectTestLgnplcy(TestLgnplcyVO testLgnplcyVO);
+	TestLgnplcyVO selectTestLgnplcy(TestLgnplcyVO testLgnplcyVO) throws BaseRuntimeException, Exception;
 
 }

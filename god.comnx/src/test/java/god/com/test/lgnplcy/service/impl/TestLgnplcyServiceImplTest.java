@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import org.egovframe.rte.fdl.cmmn.exception.BaseRuntimeException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -102,9 +103,11 @@ class TestLgnplcyServiceImplTest extends EgovAbstractTestJUnit5 {
 
 	/**
 	 * 조회(단건) select[공통표준단어]
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void testB10selectTestLgnplcy() {
+	void testB10selectTestLgnplcy() throws BaseRuntimeException, Exception {
 //		LoginPolicy testData = testData();
 
 		// 로그인 사용자 정보 획득 방법
