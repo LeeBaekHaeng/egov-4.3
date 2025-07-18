@@ -1,14 +1,13 @@
-<project name="MyProject" default="dist" basedir="../">
+<project name="MyProject" default="dist" basedir=".">
 	<description>
     simple example build file
   </description>
 	<!-- set global properties for this build -->
-	<property name="src" location="src" />
-	<property name="src2" location="../god.com/src" />
-	<property name="build" location="${user.home}/Desktop/자체 개발보안점검결과" />
+	<property name="src" location="../../src" />
+	<property name="build" location="${user.home}/Desktop/공통컴포넌트 프로젝트 소스" />
 	<property name="dist" location="${user.home}/Desktop/dist" />
 
-	<target name="init" depends="clean">
+	<target name="init">
 		<!-- Create the time stamp -->
 		<!--<tstamp />-->
 
@@ -27,19 +26,16 @@
 		<echo>src=${src}</echo>
 		<echo>build=${build}</echo>
 
-		<copy todir="${build}/자체 개발보안점검결과서_${TODAY_KR}/god.comnx/src" overwrite="true" verbose="true">
+		<copy todir="${build}/공통컴포넌트 프로젝트 소스_${TODAY_KR}/god.comnx/src" overwrite="true" verbose="true">
 			<fileset dir="${src}">
-				<include name="main/java/god/**/*.java" />
-				<include name="main/resources/god/mapper/com/**/*.xml" />
+				<include name="main/java/egovframework/**/*.java" />
+				<include name="main/resources/egovframework/mapper/com/**/*.xml" />
+				<include name="main/webapp/**/*.jsp" />
+				<include name="main/webapp/**/*.js" />
 			</fileset>
 		</copy>
 
-		<copy todir="${build}/자체 개발보안점검결과서_${TODAY_KR}/god.com/src" overwrite="true" verbose="true">
-			<fileset dir="${src2}">
-				<include name="main/java/god/**/*.java" />
-				<include name="main/resources/god/mapper/com/**/*.xml" />
-			</fileset>
-		</copy>
+		<zip destfile="${build}/공통컴포넌트 프로젝트 소스_${TODAY_KR}.zip" basedir="${build}/공통컴포넌트 프로젝트 소스_${TODAY_KR}" />
 
 	</target>
 
