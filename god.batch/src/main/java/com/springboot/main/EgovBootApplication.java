@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Import;
  */
 
 @SpringBootApplication
-@ComponentScan(basePackages = "egovframework")
+@ComponentScan(basePackages = { "egovframework", "god" })
 @Import(EgovBootInitialization.class)
 @EnableBatchProcessing
 public class EgovBootApplication {
