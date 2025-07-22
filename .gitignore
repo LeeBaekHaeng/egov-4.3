@@ -32,3 +32,4 @@ replay_pid*
 target/
 bin/
 
+god.batch/.project
