@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AaResultVo {
+public class AaResponseVo {
 
 	private String result;
 
