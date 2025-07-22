@@ -1,0 +1,65 @@
+{
+	"results": {
+		"common": {
+			"errorMessage": "정상",
+			"countPerPage": "2",
+			"totalCount": "102",
+			"errorCode": "0",
+			"currentPage": "1"
+		},
+		"juso": [
+			{
+				"detBdNmList": "",
+				"engAddr": "4 Jijokbuk-ro, Yuseong-gu, Daejeon",
+				"rn": "지족북로",
+				"emdNm": "지족동",
+				"zipNo": "34070",
+				"roadAddrPart2": " (지족동)",
+				"emdNo": "01",
+				"sggNm": "유성구",
+				"jibunAddr": "대전광역시 유성구 지족동 1016-5",
+				"siNm": "대전광역시",
+				"roadAddrPart1": "대전광역시 유성구 지족북로 4",
+				"bdNm": "",
+				"admCd": "3020012000",
+				"udrtYn": "0",
+				"lnbrMnnm": "1016",
+				"roadAddr": "대전광역시 유성구 지족북로 4 (지족동)",
+				"lnbrSlno": "5",
+				"buldMnnm": "4",
+				"bdKdcd": "0",
+				"liNm": "",
+				"rnMgtSn": "302003167104",
+				"mtYn": "0",
+				"bdMgtSn": "3020012000110160005000001",
+				"buldSlno": "0"
+			},
+			{
+				"detBdNmList": "",
+				"engAddr": "6 Jijokbuk-ro, Yuseong-gu, Daejeon",
+				"rn": "지족북로",
+				"emdNm": "지족동",
+				"zipNo": "34070",
+				"roadAddrPart2": " (지족동)",
+				"emdNo": "01",
+				"sggNm": "유성구",
+				"jibunAddr": "대전광역시 유성구 지족동 1016-4",
+				"siNm": "대전광역시",
+				"roadAddrPart1": "대전광역시 유성구 지족북로 6",
+				"bdNm": "",
+				"admCd": "3020012000",
+				"udrtYn": "0",
+				"lnbrMnnm": "1016",
+				"roadAddr": "대전광역시 유성구 지족북로 6 (지족동)",
+				"lnbrSlno": "4",
+				"buldMnnm": "6",
+				"bdKdcd": "0",
+				"liNm": "",
+				"rnMgtSn": "302003167104",
+				"mtYn": "0",
+				"bdMgtSn": "3020012000110160004000001",
+				"buldSlno": "0"
+			}
+		]
+	}
+}
