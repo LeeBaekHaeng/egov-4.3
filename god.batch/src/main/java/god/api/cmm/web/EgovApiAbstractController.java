@@ -68,7 +68,10 @@ public class EgovApiAbstractController {
 	 */
 	protected ObjectMapper createObjectMapper() {
 		final ObjectMapper mapper = new ObjectMapper();
+
+		// JSON 역직렬화 시 알 수 없는 필드를 무시하도록 설정합니다.
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
 		return mapper;
 	}
 
