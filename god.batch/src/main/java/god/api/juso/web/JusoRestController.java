@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import god.api.cmm.web.EgovApiAbstractController;
 import god.api.juso.service.JusoRequestVo;
 import god.api.juso.service.JusoResponseVo;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController
 @Slf4j
-public class JusoRestController {
+public class JusoRestController extends EgovApiAbstractController {
 
 	// https://business.juso.go.kr/addrlink/openApi/searchApi.do
 
@@ -75,7 +75,9 @@ public class JusoRestController {
 			log.debug("getResultType={}", jusoRequestVo.getResultType());
 		}
 
-		RestTemplate restTemplate = new RestTemplate();
+//		RestTemplate restTemplate = new RestTemplate();
+//		RestTemplate restTemplate = createRestTemplate();
+		RestTemplate restTemplate = createRestTemplate(30_000);
 
 		Map<String, Object> uriVariables = new HashMap<>();
 		uriVariables.put("confmKey", jusoRequestVo.getConfmKey());
@@ -96,8 +98,9 @@ public class JusoRestController {
 		}
 
 		JusoResponseVo jusoResponseVo;
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		final ObjectMapper mapper = new ObjectMapper();
+//		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		final ObjectMapper mapper = createObjectMapper();
 		try {
 			jusoResponseVo = mapper.readValue(responseString, JusoResponseVo.class);
 		} catch (JsonMappingException e) {
